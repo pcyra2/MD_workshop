@@ -1,0 +1,190 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.1 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global}
+    \entry{Ponder2003ForceSimulations}{incollection}{}
+      \name{author}{2}{}{%
+        {{hash=79d3149a3dbd116b2b4b84ebf0aa10c8}{%
+           family={Ponder},
+           familyi={P\bibinitperiod},
+           given={Jay\bibnamedelima W.},
+           giveni={J\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+        {{hash=dd1a485aaa482b88e5996bfcefccd082}{%
+           family={Case},
+           familyi={C\bibinitperiod},
+           given={David\bibnamedelima A.},
+           giveni={D\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \strng{namehash}{045e3a028be25104e74827c6a247aaa3}
+      \strng{fullhash}{045e3a028be25104e74827c6a247aaa3}
+      \strng{bibnamehash}{045e3a028be25104e74827c6a247aaa3}
+      \strng{authorbibnamehash}{045e3a028be25104e74827c6a247aaa3}
+      \strng{authornamehash}{045e3a028be25104e74827c6a247aaa3}
+      \strng{authorfullhash}{045e3a028be25104e74827c6a247aaa3}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{Force Fields for Protein Simulations}}
+      \field{year}{2003}
+      \field{pages}{27\bibrangedash 85}
+      \range{pages}{59}
+      \verb{doi}
+      \verb 10.1016/S0065-3233(03)66002-X
+      \endverb
+    \endentry
+    \entry{Vanommeslaeghe2009CHARMMFields}{article}{}
+      \name{author}{11}{}{%
+        {{hash=18b0aba3d18772486b316515d4c9f5d2}{%
+           family={Vanommeslaeghe},
+           familyi={V\bibinitperiod},
+           given={K.},
+           giveni={K\bibinitperiod}}}%
+        {{hash=94f8c1ced618d8f35454e2656e0de317}{%
+           family={Hatcher},
+           familyi={H\bibinitperiod},
+           given={E.},
+           giveni={E\bibinitperiod}}}%
+        {{hash=025db8a98034df7c5af97e6dbe9e0dea}{%
+           family={Acharya},
+           familyi={A\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod}}}%
+        {{hash=9089e9431d682ec321402c7384cc4658}{%
+           family={Kundu},
+           familyi={K\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod}}}%
+        {{hash=3901697e067c630537961f99b6dce54c}{%
+           family={Zhong},
+           familyi={Z\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod}}}%
+        {{hash=2fa3188b6c04ce85710eeb4ac1ec4283}{%
+           family={Shim},
+           familyi={S\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=b84c589177e58a822a6cca7f964b607a}{%
+           family={Darian},
+           familyi={D\bibinitperiod},
+           given={E.},
+           giveni={E\bibinitperiod}}}%
+        {{hash=241d3fc661acfce83218d2aee21556af}{%
+           family={Guvench},
+           familyi={G\bibinitperiod},
+           given={O.},
+           giveni={O\bibinitperiod}}}%
+        {{hash=b4acfdf14b2e09902f3c78d49b696d9d}{%
+           family={Lopes},
+           familyi={L\bibinitperiod},
+           given={P.},
+           giveni={P\bibinitperiod}}}%
+        {{hash=0daababb78b666ab392515147b8832ff}{%
+           family={Vorobyov},
+           familyi={V\bibinitperiod},
+           given={I.},
+           giveni={I\bibinitperiod}}}%
+        {{hash=3d398d47923adab7e9442033ae517d93}{%
+           family={Mackerell},
+           familyi={M\bibinitperiod},
+           given={A.\bibnamedelimi D.},
+           giveni={A\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+      }
+      \strng{namehash}{1b653a6d1f17910e4f5fff8d47c4e9a6}
+      \strng{fullhash}{7848bb822d8d3db071d583989b30bf10}
+      \strng{bibnamehash}{1b653a6d1f17910e4f5fff8d47c4e9a6}
+      \strng{authorbibnamehash}{1b653a6d1f17910e4f5fff8d47c4e9a6}
+      \strng{authornamehash}{1b653a6d1f17910e4f5fff8d47c4e9a6}
+      \strng{authorfullhash}{7848bb822d8d3db071d583989b30bf10}
+      \field{sortinit}{2}
+      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{01928651}
+      \field{journaltitle}{J. Comput. Chem.}
+      \field{title}{{CHARMM general force field: A force field for drug-like molecules compatible with the CHARMM all-atom additive biological force fields}}
+      \field{year}{2009}
+      \field{pages}{NA\bibrangedash NA}
+      \range{pages}{-1}
+      \verb{doi}
+      \verb 10.1002/jcc.21367
+      \endverb
+    \endentry
+    \entry{Maier2015Ff14SB:Ff99SB}{article}{}
+      \name{author}{6}{}{%
+        {{hash=64ef159581a64b8a7de4eaffc56a3ebd}{%
+           family={Maier},
+           familyi={M\bibinitperiod},
+           given={James\bibnamedelima A.},
+           giveni={J\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=75c000c60456845d43025b56aae3d927}{%
+           family={Martinez},
+           familyi={M\bibinitperiod},
+           given={Carmenza},
+           giveni={C\bibinitperiod}}}%
+        {{hash=a2517c82bc4d261ed69dd502f08d3167}{%
+           family={Kasavajhala},
+           familyi={K\bibinitperiod},
+           given={Koushik},
+           giveni={K\bibinitperiod}}}%
+        {{hash=98d99fa25d11835b2108dbccd15df825}{%
+           family={Wickstrom},
+           familyi={W\bibinitperiod},
+           given={Lauren},
+           giveni={L\bibinitperiod}}}%
+        {{hash=27ffce587694551076fdec4eaf0a9cf8}{%
+           family={Hauser},
+           familyi={H\bibinitperiod},
+           given={Kevin\bibnamedelima E.},
+           giveni={K\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+        {{hash=912a6ddaee5bd77606df9d7181863b31}{%
+           family={Simmerling},
+           familyi={S\bibinitperiod},
+           given={Carlos},
+           giveni={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{7f58011623a2199bd8ec9676dfed95e7}
+      \strng{fullhash}{5f66263a22f6c4b75a06329aeb2fe7b3}
+      \strng{bibnamehash}{7f58011623a2199bd8ec9676dfed95e7}
+      \strng{authorbibnamehash}{7f58011623a2199bd8ec9676dfed95e7}
+      \strng{authornamehash}{7f58011623a2199bd8ec9676dfed95e7}
+      \strng{authorfullhash}{5f66263a22f6c4b75a06329aeb2fe7b3}
+      \field{sortinit}{3}
+      \field{sortinithash}{a37a8ef248a93c322189792c34fc68c9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1549-9618}
+      \field{journaltitle}{J. Chem. Theo. Comput.}
+      \field{month}{8}
+      \field{number}{8}
+      \field{title}{{ff14SB: Improving the Accuracy of Protein Side Chain and Backbone Parameters from ff99SB}}
+      \field{volume}{11}
+      \field{year}{2015}
+      \field{pages}{3696\bibrangedash 3713}
+      \range{pages}{18}
+      \verb{doi}
+      \verb 10.1021/acs.jctc.5b00255
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

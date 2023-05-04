@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+conda create \PYGZhy{}\PYGZhy{}name acpype
+    y   \PYG{c+c1}{\PYGZsh{} proceed with creating the environment}
+conda activate acpype
+conda install \PYGZhy{}c conda\PYGZhy{}forge acpype
+    y   \PYG{c+c1}{\PYGZsh{} proceed with installing}
+\end{Verbatim}

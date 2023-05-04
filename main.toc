@@ -1,0 +1,29 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\selectlanguage *[variant=british]{english}
+\contentsline {section}{\numberline {1}How to obtain software}{1}{section.3}%
+\contentsline {subsection}{\numberline {1.a}Anaconda}{2}{subsection.5}%
+\contentsline {subsection}{\numberline {1.b}AMBER}{2}{subsection.8}%
+\contentsline {subsection}{\numberline {1.c}Acpype}{3}{subsection.11}%
+\contentsline {subsection}{\numberline {1.d}gnina}{3}{subsection.14}%
+\contentsline {section}{\numberline {2}Workshop outline}{4}{section.17}%
+\contentsline {subsection}{\numberline {2.a}Goals}{4}{subsection.18}%
+\contentsline {subsection}{\numberline {2.b}Software}{4}{subsection.21}%
+\contentsline {section}{\numberline {3}Theory}{6}{section.25}%
+\contentsline {subsection}{\numberline {3.a}Molecular Dynamics}{6}{subsection.27}%
+\contentsline {subsection}{\numberline {3.b}Docking}{7}{subsection.32}%
+\contentsline {subsection}{\numberline {3.c}GB/PBSA}{7}{subsection.33}%
+\contentsline {section}{\numberline {4}Tasks}{7}{section.34}%
+\contentsline {subsection}{\numberline {4.a}Initial Tasks}{7}{subsection.35}%
+\contentsline {subsection}{\numberline {4.b}Docking}{9}{subsection.52}%
+\contentsline {subsection}{\numberline {4.c}Molecular Dynamics Preparation}{9}{subsection.53}%
+\contentsline {subsubsection}{\numberline {4.c.i}Parameterisation}{9}{subsubsection.54}%
+\contentsline {subsection}{\numberline {4.d}Molecular Dynamics}{10}{subsection.59}%
+\contentsline {subsection}{\numberline {4.e}Free Energy calculation}{10}{subsection.60}%
+\contentsline {subsubsection}{\numberline {4.e.i}Setup}{10}{subsubsection.63}%
+\contentsline {subsubsection}{\numberline {4.e.ii}Calculation}{11}{subsubsection.68}%
+\contentsline {subsubsection}{\numberline {4.e.iii}Analysis}{13}{subsubsection.74}%
+\contentsline {section}{\numberline {5}Cheat codes}{14}{section.76}%
+\contentsline {subsection}{\numberline {5.a}Initiating the file system}{14}{subsection.78}%
+\contentsline {subsection}{\numberline {5.b}Geting the protein structure}{14}{subsection.80}%
+\contentsline {section}{\numberline {6}Bibliography}{14}{section.82}%
+\contentsline {section}{\textenglish {Acronyms}}{16}{section*.84}%

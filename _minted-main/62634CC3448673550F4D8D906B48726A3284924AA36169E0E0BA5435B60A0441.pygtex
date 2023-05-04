@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+wget https://github.com/gnina/gnina/releases/download/v1.0.3/gnina
+chmod +x gnina
+\PYG{c+c1}{\PYGZsh{} It is then recommended to add this to your PATH, .bashrc or modules in order to easily run this later in the workshop.}
+\end{Verbatim}

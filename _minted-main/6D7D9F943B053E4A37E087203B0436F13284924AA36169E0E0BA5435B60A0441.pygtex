@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+mpirun \PYGZhy{}np NUM\PYGZus{}PROCESSORS MMPBSA.py.MPI \PYGZhy{}O \PYGZhy{}i INPUT\PYGZus{}FILE.in \PYGZhy{}o gb\PYGZus{}results.dat \PYGZhy{}sp SOLVATED\PYGZus{}COMPLEX.parm7 \PYGZhy{}cp complex.parm7 \PYGZhy{}rp receptor.parm7 \PYGZhy{}lp ligand.parm7 \PYGZhy{}y PRODUCTION\PYGZus{}TRAJECTORY.nc
+\end{Verbatim}

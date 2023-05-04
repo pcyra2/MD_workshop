@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+conda create \PYGZhy{}\PYGZhy{}name AmberTools22
+    y   \PYG{c+c1}{\PYGZsh{} proceed with creating the AmberTools22 conda environment}
+conda activate AmberTools22
+conda install \PYGZhy{}c conda\PYGZhy{}forge \PYG{n+nv}{ambertools}\PYG{o}{=}\PYG{l+m}{22} compilers
+    y   \PYG{c+c1}{\PYGZsh{} proceed with installing}
+\end{Verbatim}

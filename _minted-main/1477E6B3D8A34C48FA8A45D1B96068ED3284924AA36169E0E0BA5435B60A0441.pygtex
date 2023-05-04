@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+conda activate acpype
+acpype \PYGZhy{}i LIG.pdb \PYGZhy{}c bcc \PYGZhy{}n NET\PYGZus{}CHARGE \PYGZhy{}a gaff
+\end{Verbatim}

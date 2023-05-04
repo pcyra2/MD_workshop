@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+ante\PYGZhy{}MMPBSA.py \PYGZhy{}p SOLVATED\PYGZus{}COMPLEX.parm7 \PYGZhy{}c complex.parm7 \PYGZhy{}r receptor.parm7 \PYGZhy{}l ligand.parm7 \PYGZhy{}s :WAT,Na+ \PYGZhy{}n :LIGAND\PYGZus{}NAME \PYGZhy{}\PYGZhy{}radii\PYG{o}{=}mbondi2
+\end{Verbatim}

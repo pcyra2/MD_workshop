@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+wget https://files.rcsb.org/download/1AZX.pdb .
+\end{Verbatim}
