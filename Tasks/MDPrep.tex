@@ -1,0 +1,15 @@
+\subsection{Molecular Dynamics Preparation}
+\subsubsection{Parameterisation}
+    \paragraph{}
+        To run a molecular dynamics simulation, you first need to parameterise all of the atoms in the system. There are multiple different molecular dynamics force fields that contain standard parameters for common amino acids and some other small or simple molecules. For bigger or more complicated molecules however, you will need to create your own custom parameters. 
+
+    \paragraph{}
+        Although there is a rigorous method that can be undertaken to correctly parameterise complex ligands, including comparing the parameters with ab-initio calculations, we shall be using an automated method for speed and simplicity. \footnote{You can learn more about the rigorous process of parameterisation \href{http://ambermd.org/tutorials/basic/tutorial4b/}{here}.}
+
+    \paragraph{}
+        We shall be using the \texttt{acpype}\cite{} automated script to parameterise the ligands in this workshop, which combines the parameterisation tools offered by amber into a simple to use script. We shall be using \texttt{bcc} charges and the \texttt{gaff} atom typing so that it will be compatible with the \enquote{FF14SB} forcefield that we shall be using for the simulation.
+
+    \begin{bashcmd}[label=listing:acpypeCMD]{How to use acpype.}
+        conda activate acpype
+        acpype -i LIG.pdb -c bcc -n NET_CHARGE -a gaff
+    \end{bashcmd}

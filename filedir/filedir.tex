@@ -1,0 +1,456 @@
+\section{File and directory management}
+\label{sec:filedir}
+  \subsection{Preamble}
+
+    In this \namecref{sec:filedir} of the workshop, we shall introduce some important file types and show you how to create, edit, move, and delete them.
+    We shall also explore some important techniques on file management and demonstrate the various ways to create and change directories.
+    It is important that you master these skills because you will invariably need them on a daily basis in your research project.
+
+    Throughout the rest of the workshop, there are several terminologies related to files and directories that we will use repeatedly --- these are summarised in \cref{tab:filesGloss}.
+
+    \begin{table}[h]
+      \centering
+      \caption{Glossary of terms used in this \namecref{sec:filedir}.}
+      \renewcommand{\arraystretch}{1.25}
+      \begin{tabularx}{\textwidth}{lX}
+        \toprule
+        \textbf{Term}        & \textbf{Meaning}                                                                                                                                                                                                                                            \\ \midrule
+        \textbf{Directory}   & Identical to folders on Microsoft Windows and Apple macOS. Directories allow you to organise your files in a logical fashion.                                                                                                                               \\
+        \textbf{Script}      & A program or sequence of instructions that is interpreted or carried out by another program.                                                                                                                                                                \\
+        \textbf{Binary file} & A file consisting of a series of sequential bytes that is unreadable by a human but can be understood by computers.                                                                                                                                         \\
+        \textbf{Input file}  & A file containing key information that controls how a calculation runs.                                                                                                                                                                                     \\
+        \textbf{Text editor} & A program that allows you to open, read and edit text files.                                                                                                                                                                                                \\
+        \textbf{Write}       & Save.                                                                                                                                                                                                                                                       \\
+        \textbf{Delimit}     & To break up a sentence or list of words. The English written language uses a space as its delimiter. In theory, you can use any special character as delimiters, but in practice, \glspl*{acr:os} have specific rules about what can be used as delimiters. \\ \bottomrule
+      \end{tabularx}
+      \label{tab:filesGloss}
+    \end{table}
+
+  \subsection{Creating and editing files}
+
+    There are multiple ways of creating files, but the simplest one is to open the file that you want to create using a \textbf{text editor}.
+    There are a number of text editors available to use in Linux, but the most popular one is \textsc{Vim} (\href{https://www.vim.org/}{https://www.vim.org/}).
+    \textsc{Vim} is not part of the Linux kernel but is available by default on most Linux distros.
+    If not, it can be easily installed.
+
+    \begin{bashcmd}[label=listing:openfile]{Creating/opening a file called \texttt{text.txt} in \textsc{Vim}.}
+      vim test.txt
+    \end{bashcmd}
+
+    The command in \cref{listing:openfile} instructs \textsc{Vim} to open a file called \texttt{test.txt} if it exists in the current directory, or to create a new file with this name if it does not exist yet.
+    Once in \textsc{Vim}, notice that the bottom left corner of the document is blank, which signifies that you are currently in the \enquote{normal} mode of \textsc{Vim}.
+    In this mode, you cannot edit the content of the file just by typing normally, because your keystrokes are registered as edit commands for \textsc{Vim} instead of normal texts.
+    It might seem bizarre and awkward at first, but this mode is where most of the power of \textsc{Vim} is harnessed.
+
+    You can edit the file by pressing \enquote{\texttt{i}} which causes \textbf{\texttt{--INSERT--}} to appear in the bottom left corner of the document.
+    The key \enquote{\texttt{i}} is indeed a command that tells \textsc{Vim} to switch to the \enquote{insert} mode.
+    Once in this mode, you can type the contents of your file and use the arrow keys to navigate the document.
+    There are, however, more efficient ways to move around in \textsc{Vim}, but they are rather advanced, so we will not cover them here.
+
+    Once you have finished editing the document, you can press the \enquote{\texttt{esc}} key which should cause the \textbf{\texttt{--INSERT--}} in the bottom left hand corner of your screen to disappear, thus switching \textsc{Vim} back to its \enquote{normal} mode.
+    Finally to write the file, you must type \enquote{\texttt{:w}} \emph{while in normal mode}.
+    The colon \enquote{\texttt{:}} tells \textsc{Vim} to enter its special \enquote{command} mode, and the \enquote{\texttt{w}} is the command for writing the content of the file.
+    After pressing \enquote{\texttt{:}}, you should notice that the command you are typing now appears on the bottom left corner of the document.
+    To write and quit, you can type \enquote{\texttt{:wq}} or \enquote{\texttt{:x}}, and to quit without saving, you can type \enquote{\texttt{:q!}}.
+
+    On most Linux distros, copying and pasting texts is very simple and does not require you to remember any shortcuts.
+    In fact, you simply have to highlight any text that you want to copy, then press the middle mouse button (scroll wheel) to paste the text into a desired location.%
+    \footnote{However, it should be noted that this is \emph{not} a native feature of the Linux kernel, but rather an added functionality introduced by the \textsc{Xorg} display server, and so might not be available on some Linux distros.}
+
+    \begin{task}[label=task:vimintro]{Creating and editing files in \textsc{Vim}}
+      \begin{enumerate}[label=(\alph*)]
+        \item Use \textsc{Vim} to create and write an empty file called \texttt{vim\_practice.txt}.
+        \item Use \textsc{Vim} to open the newly created \texttt{vim\_practice.txt} file and add a few lines of text of your choice. Practise switching between the \enquote{normal} mode and the \enquote{insert} mode.
+      \end{enumerate}
+    \end{task}
+
+
+  \subsection{File naming}
+
+    As a general rule of thumb, when creating files, you should logically name them so that you know what they contain without having to open them up.
+    Also, when naming files and directories, you should not use blank spaces or backslashes.
+    You should also use a logical file extension which allows you to understand the type of your file and helps other programs interpret the contents of your file easily.
+    Some conventional extensions in computational chemistry are given in \cref{tab:commonexts}.
+
+    \begin{table}[h]
+        \centering
+        \caption{Common file extensions in computational chemistry and their uses.}
+        \renewcommand{\arraystretch}{1.25}
+        \begin{tabularx}{\textwidth}{>{\ttfamily}l X}
+          \toprule
+          \textbf{\rmfamily Extension} & \textbf{Contents}                                                      \\ \midrule
+          .inp (.in)                   & Input file                                                             \\
+          .out                         & Output file                                                            \\
+          .txt (.text)                 & Plain text file                                                        \\
+          .sh                          & Shell / \texttt{bash} script                                                      \\
+          .py                          & Python script                                                          \\
+          .xyz                         & Molecular coordinate file                                              \\
+          .mol2                        & Molecular coordinate file with bonding information                     \\
+          .pdb                         & Molecular coordinate file (usually for larger molecules like proteins) \\
+          .dat, .csv                   & Data file, similar to a spreadsheet with multiple delimited columns    \\
+          .agr                         & \enquote{grace} file, often used for simple plotting                         \\
+          .jpg, .png, .svg, .jpeg      & Standard image files                                                   \\
+          .pdf                         & Portable document format (common)                                      \\
+          .tmp                         & Temporary file                                                         \\ \bottomrule
+        \end{tabularx}
+        \label{tab:commonexts}
+    \end{table}
+
+    We note, however, that extensions are not a strict requirement of Linux: they are mainly for the \gls*{acr:os} to identify which program(s) to use to open a file when it is double-clicked on in a graphical shell.
+    On the other hand, when opening a file in a command-line shell, you \emph{always} have to specify which program to use to display, execute, or interpret the file, irrespective of what extension it has.
+    The exact mechanism to do this will be explained in more details in \cref{sec:software,sec:cluster}.
+    Having said that, in computational chemistry, extensions often specify the format that a file needs to conform to in order to be understood correctly by various scientific applications.
+
+    Some things you must \textbf{never} do when naming files (or directories) is use blank spaces or special characters like
+    \begin{equation*}
+      \texttt{' " , ! ? \{ \} \% \& \$ | * \^{} }
+    \end{equation*}
+    This is because these characters carry special meanings in Linux and other \glspl*{acr:os}, and file names that contain them can confuse the \gls*{acr:os}.
+    Instead, a better way to delimit a name is to use period (.), underscore (\textunderscore), or hyphen (-).
+    \texttt{YouCanAlsoJustNotUseDelimitersAtAll}, but you should be careful to avoid \texttt{namesthatareindecipherable}.
+    \Cref{tab:filenameexamples} shows several examples of good and bad file names.
+
+    \begin{table}[h]
+        \centering
+        \caption{Examples of good and bad file names and their extensions.}
+        \renewcommand{\arraystretch}{1.25}
+        \begin{tabular}{>{\ttfamily}l >{\ttfamily}l}
+          \toprule
+          \textbf{\rmfamily Good names}  & \textbf{\rmfamily Bad names}                                                        \\ \midrule
+          LitReview.txt                  & Lit Review.txt                                                                      \\
+          Lit\textunderscore Review.txt  & Lit\textbackslash Review                                                            \\
+          LiteratureReview.doc           & LiteratureReview.sh                                                                 \\
+          LitRev.pdf                     & file1.pdf                                                                           \\
+          LitRev\textunderscore v1.1.txt & LitRev\textunderscore Final\textunderscore FINAL\textunderscore OKAYNOWITSFINAL.txt \\
+          Lit-Review.txt                 & Lit*Rev.txt                                                                         \\
+          LIT\textunderscore REVIEW.txt  & 1LIT?REVIEW!txt                                                                     \\ \bottomrule
+        \end{tabular}
+        \label{tab:filenameexamples}
+    \end{table}
+
+    \begin{task}[label=task:filename]{File names and formats}
+      \begin{enumerate}[label=(\alph*)]
+        \item Use the Internet to look up the required format for a \texttt{.xyz} molecular coordinate file and compare that to the format for a \texttt{.mol2} file. Note how both of these are essentially text files but have different specific formats that other programs will expect when reading them in.
+        \item Explain why the names in \cref{tab:filenameexamples} are good or bad.
+      \end{enumerate}
+    \end{task}
+
+
+  \subsection{Copying, moving, and deleting}
+
+    \subsubsection{Copying files and directories}
+
+      To copy a file or directory, you can use the \enquote{\texttt{cp}} command, which stands for \enquote{copy}.
+      This command takes at least two arguments, and the natures of the arguments determine how the command behaves.
+      In a nutshell, \enquote{\texttt{cp}} is roughly equivalent to combining  \enquote{copy and paste} where the first argument(s) is (are) what you are copying and the last argument is where you would like to paste it (them).
+
+      To duplicate a file into a new file with a different name in the current directory, simply use \enquote{\texttt{cp}} with two arguments where the first one is the file that you want to duplicate and the second one is the name of the new, duplicated file.
+      An example of this is given in the first command of \cref{listing:copy}: this duplicates a file called \texttt{test\_file.txt} into a new file called \texttt{new\_test\_file.txt} with identical content in the same directory.
+
+      To copy a file into a new location, the second argument to \enquote{\texttt{cp}} now becomes the path to the location where you wish to copy the file to.
+      For example, the second command in \cref{listing:copy} copies a file called \texttt{test\_file.txt} in the current directory to a directory called \texttt{./Test\_Directory/}.
+      At the end of this command, there should be a new file located at \texttt{./Test\_Directory/test.txt}.
+      We will explain what the \enquote{\texttt{./}} means shortly.
+
+      Finally, to copy a directory \emph{and all of its content}, the syntaxes are essentially the same as above, with the addition of a \enquote{\texttt{-r}} flag.
+      This is because the copying of a directory and all of its content must be carried out \emph{recursively}, for which the \enquote{\texttt{-r}} flag stands.
+      The third and fourth commands in \cref{listing:copy} give examples for this.
+      \texttt{bash} will complain if you attempt to copy a directory without specifying the \enquote{\texttt{-r}} flag.
+
+      \begin{bashcmd}[label=listing:copy]{Example commands for copying files and directories.}
+        cp test_file.txt new_test_file.txt
+        cp test_file.txt ./Test_Directory/
+        cp -r test_dir new_test_dir
+        cp -r test_dir ./Test_Directory/
+      \end{bashcmd}
+
+      \begin{task}[label=task:copy]{Copying files and directories}
+        \begin{enumerate}[label=(\alph*)]
+          \item Given that you have three files called \texttt{mol\_1.xyz}, \texttt{mol\_2.xyz}, and \texttt{mol\_3.xyz}, and a directory called \texttt{structures} in your current directory, what does each of the following commands do?
+          \begin{bashcmd}*{}
+            cp mol_1.xyz mol_h2.xyz
+            cp mol_1.xyz mol_2.xyz mol_3.xyz structures
+            cp -r structures molecules
+          \end{bashcmd}
+          \item Why does the following command fail?
+          \begin{bashcmd}*{}
+            cp mol_1.xyz mol_2.xyz mol_3.xyz
+          \end{bashcmd}
+        \end{enumerate}
+      \end{task}
+
+    \subsubsection{Moving files and directories}
+      The command for moving files and directories is \enquote{\texttt{mv}}, which stands for \enquote{move}.
+      It works just like \enquote{\texttt{cp}}, with two main differences:
+      \begin{itemize}
+        \item \enquote{\texttt{mv}} deletes the file or directory in the original location, and
+        \item the flag \enquote{\texttt{-r}} is not required when applying \enquote{\texttt{mv}} to a directory.
+      \end{itemize}
+      You can therefore use this command to change the name of a file or directory, or in a similar way to \enquote{cut and paste} where the first argument is the file or directory that you want to cut/move and the second argument is where you would like to paste/move it to.
+      \Cref{listing:move} shows some example uses of the \enquote{\texttt{mv}} command.
+      \begin{bashcmd}[label=listing:move]{Example uses of the \enquote{\texttt{mv}} command.}
+          mv test.txt My_Test_File.txt
+          mv My_Test_File.txt ./Test_Directory/test.txt
+          mv Test_Directory My_Test_Directory
+      \end{bashcmd}
+
+      \begin{task}[label=task:move]{Moving files and directories}
+        \begin{enumerate}[label=(\alph*)]
+          \item What does each of the commands in \cref{listing:move} do?
+          \item Given that you have three files called \texttt{protein\_1.xyz}, \texttt{protein\_2.xyz}, and \texttt{protein\_3.xyz}, and a directory called \texttt{proteins} in your current directory, why does the following command fail?
+          \begin{bashcmd}*{}
+            mv protein_1.xyz protein_2.xyz protein_3.xyz
+          \end{bashcmd}
+
+          \item What does each of the following commands do?
+          \begin{bashcmd}*{}
+            mv protein_1.xyz myosin.xyz
+            mv myosin.xyz protein_2.xyz protein_3.xyz proteins
+            mv proteins macromolecules
+          \end{bashcmd}
+
+          \item Why does the following command fail \emph{after executing the three commands above}?
+          \begin{bashcmd}*{}
+            mv protein_1.xyz macromolecules
+          \end{bashcmd}
+        \end{enumerate}
+      \end{task}
+
+    \subsubsection{Deleting files and directories}
+      To delete a file, you can use the command \enquote{\texttt{rm}}, which stands for \enquote{remove}.
+      This command takes one or more arguments, all of which are files or directories to be deleted.
+      If \emph{any} of the arguments is a directory, then the flag \enquote{\texttt{-r}} \textbf{must} be included so that \enquote{\texttt{rm}} can operate recursively.
+
+      Before removing anything using the \enquote{\texttt{rm}} command, you must be sure that it is no longer needed.
+      It is very difficult to retrieve items deleted by \enquote{\texttt{rm}} --- there is no such thing as \emph{Recycle Bin} or \emph{Trash} for the \enquote{\texttt{rm}} command.
+
+      \begin{task}[label=task:remove]{Removing files and directories}
+        \begin{enumerate}[label=(\alph*)]
+          \item Given that you have three files called \texttt{complex\_1.xyz}, \texttt{complex\_2.xyz}, and \texttt{complex\_3.xyz}, and a directory called \texttt{TMcomplexes} in your current directory, what does each of the following commands do?
+          \begin{bashcmd}*{}
+            rm complex_1.xyz
+            rm -r complex_2.xyz complex_3.xyz TMcomplexes
+          \end{bashcmd}
+
+          \item * Use \textsc{Vim} to create two empty files called \texttt{metal\_1.inp} and \texttt{metal\_2.inp} in your current directory.
+          Then, execute the following commands:
+          \begin{bashcmd}*{}
+            mv metal_1.inp .metal_1.inp
+            rm metal_2.inp
+            ls
+            ls -a
+          \end{bashcmd}
+          What is the difference between the first two commands?
+        \end{enumerate}
+      \end{task}
+
+    \subsubsection{Wildcards in \texttt{bash}}
+
+      You have seen in \cref{task:copy,task:move,task:remove} that the three commands \enquote{\texttt{cp}}, \enquote{\texttt{mv}}, and \enquote{\texttt{rm}} can take multiple arguments.
+      If the multiple arguments share some pattern, \textbf{wildcard characters}, \ie \texttt{*} and \texttt{?}, can be used to specify these arguments all at once.
+      The star \texttt{*} stands for \enquote{any one or more characters}, and the question mark \texttt{?} stands for \enquote{any single character}.
+      Their use is best demonstrated via an example.
+
+      \begin{task}[label=task:wildcard]{Using wildcards to specify patterns}
+        \begin{enumerate}[label=(\alph*)]
+          \item Execute the following command to quickly create three empty files called \texttt{calc\_1.out}, \texttt{calc\_2.out}, and \texttt{calc\_3.out}:
+          \begin{bashcmd}*{}
+            touch calc_{1,2,3}.out
+          \end{bashcmd}
+
+          \item To remove all three files, the following commands are all equivalent:
+          \begin{bashcmd}*{}
+            rm calc_1.out calc_2.out calc_3.out
+            rm calc_{1,2,3}.out
+            rm calc*
+            rm *.out
+            rm calc_?.out
+          \end{bashcmd}
+          In the last three commands, the wildcards all expand to give \texttt{calc\_1.out calc\_2.out calc\_3.out}, because these are the three files in the current directory that match the pattern specified by the wildcards.
+
+          Experiment around with creating file names of various patterns and then copying/moving/removing them quickly using wildcards.
+        \end{enumerate}
+      \end{task}
+
+
+  \subsection{Directory management}
+
+    To create a directory, you can use the \enquote{\texttt{mkdir}} command, which stands for \enquote{make directory}.
+    This command takes one or more arguments, each of which is the name of a new directory to be created.
+    Some examples are shown in the first two commands of \cref{listing:mkdir}.
+
+    \begin{bashcmd}[label=listing:mkdir]{Example commands making directories.}
+        mkdir ./Test_Directory
+        mkdir ./New_Directory_1 ./New_Directory_2 ./New_Directory_3
+    \end{bashcmd}
+
+    You can make directories within directories within directories (and so on) to create a tree of directories which allows you to logically store your workflow in easy-to-find-and-access locations.
+    It is generally good practice where possible to create a new directory for every new thing that you do so that all of the relevant files are in the same location without any other clutter.
+
+    To inspect the contents of a directory, you can use the command \enquote{\texttt{ls}}, which stands for \enquote{list}.
+    You first met this command in \cref{sec:anatomybashcmd}.
+    This lists all of the files and directories within the current directory and is an incredibly useful command when working in a command-line shell.
+    Another command that you can also use is \enquote{\texttt{tree}}, which shows you the files and sub-directories within the current directory recursively (\cref{listing:lstreeoutputs}).
+
+    \begin{bashoutput}[label=listing:lstreeoutputs]{Example outputs of \enquote{\texttt{ls}} and \enquote{\texttt{tree}}.}
+      user@computer:~/workshop$ ls
+      Test_Directory test.txt
+      user@computer:~/workshop$
+      user@computer:~/workshop$ tree
+      .
+      ├── Test_Directory
+      │   ├── file1.txt
+      │   ├── file2.txt
+      │   ├── file3.txt
+      │   └── file4.txt
+      └── test.txt
+
+      1 directory, 5 files
+    \end{bashoutput}
+
+    \Cref{task:dirman} aims to provide some practice with directory creation and management.
+
+    \begin{task}[label=task:dirman]{Directory management}
+      \begin{enumerate}[label=(\alph*)]
+        \item The flag \enquote{\texttt{-p}} can be used with the command \enquote{\texttt{mkdir}} to create nested directories all at once.
+        With the aid of this flag, or otherwise, create the following directory structure, where all files are empty files:
+        \begin{bashoutput}*{}
+          .
+          └── workshop
+              └── quantum_calc
+                  └── sto-3g
+                      └── rhf
+                          ├── organic
+                          │   ├── benzene.xyz
+                          │   ├── formaldehyde.xyz
+                          │   └── methanol.xyz
+                          ├── calc.inp
+                          └── submit.sh
+        \end{bashoutput}
+
+        \item Use the \enquote{\texttt{ls}} and \enquote{\texttt{tree}} commands to verify that the contents of your current directory match the above required structure.
+      \end{enumerate}
+    \end{task}
+
+%    \begin{bashoutput}[label=listing:mkdirexample]{Example of making a directory}
+%    user@computer:~/workshop$ ls
+%    test.txt
+%    user@computer:~/workshop$ mkdir ./Test_Directory
+%    user@computer:~/workshop$ ls
+%    Test_Directory  test.txt
+%    user@computer:~/workshop$ cd ./Test_Directory
+%    user@computer:~/workshop/Test_Directory$ ls
+%    user@computer:~/workshop/Test_Directory$
+%    \end{bashoutput}
+
+
+  \subsection{Directory navigation}
+
+    Finally, once you start to make directories, you need to be able to navigate between them.
+    Before explaining how this is done, we need to first introduce how \emph{paths} work in Linux.
+
+    \subsubsection{Absolute and relative paths}
+
+      Every item (file or directory) in Linux has a \textbf{path}, or an \emph{address}, where it can be located.
+      In fact, every Linux argument that is meant to point to a file or directory in the system takes the form of a path to this file or directory.
+      This applies to the \enquote{\texttt{cp}}, \enquote{\texttt{mv}}, and \enquote{\texttt{rm}} commands you met in the earlier Sections.
+      There are two ways of specifying a path: \emph{absolute} or \emph{relative}.
+
+      \paragraph{Absolute paths}
+        An \textbf{absolute path} provides the full address to the file or directory \emph{from the root of the system}.
+        The \textbf{root} of the system is always represented by a forward slash \enquote{\texttt{/}} at the beginning of the path.
+        \Cref{listing:absolutepaths} shows several examples of absolute paths, all of which contain a forward slash \enquote{\texttt{/}} at the beginning.
+        You \textbf{must not} confuse this forward slash with other forward slashes appearing in the middle or at the end of the paths.
+        Every item on the system has a unique absolute path associated with it.
+
+        \begin{bashoutput}[label=listing:absolutepaths]{Examples of absolute paths in Linux.}
+          /
+          /home/pcyaa1/
+          /home/pcyaa1/workshop
+          /home/pcyaa1/Documents/Literature_Review
+          /home/pcyaa1/Calculations/project_1/results.txt
+        \end{bashoutput}
+
+      \paragraph{Relative paths}
+        However, it is often cumbersome to have to specify the absolute path for every file or directory, since this path can be rather long which increases the likelihood of mistakes.
+        Therefore, an alternative method to specify the address of a file or directory is to give its location \emph{relative to the current directory} --- this is known as the \textbf{relative path} of the item.
+        Relative paths do not have a forward slash at the beginning and are \emph{always} interpreted relative to the current directory.
+        \Cref{listing:relpaths} shows several examples of the addresses of the items used in \cref{listing:absolutepaths} relative to the current directory \texttt{/home/pcyaa1/}.
+
+         \begin{bashoutput}[label=listing:relpaths]{Examples of relative paths with respect to \texttt{/home/pcyaa1/}.}
+           workshop
+           Documents/Literature_Review
+           Calculations/project_1/results.txt
+         \end{bashoutput}
+
+      \subsubsection{Special directories}
+
+        There are two special relative paths that you will come across regularly:
+        \begin{itemize}
+          \item the current directory itself, represented by a single dot, \enquote{\texttt{.}}, which essentially stands for \enquote{here}, and
+          \item the parent directory of the current directory, represented by a double dot \enquote{\texttt{..}}, which essentially stands for \enquote{the directory above}.
+        \end{itemize}
+        For example, if your current directory is \texttt{/home/pcyaa1/}, then, to refer to this directory itself, you would use \enquote{\texttt{.}}, and to refer to its parent directory, which is \texttt{/home/}, you would use \enquote{\texttt{..}}.
+
+        There is a special absolute path that you will also come across regularly, and that is your own home directory itself.
+        If your username on a Linux machine is \texttt{pcyaa1}, then your home directory is indeed \texttt{/home/pcyaa1/}.
+        To refer to this directory quickly, you would use a tilde, \enquote{\texttt{\(\sim \)}}, which is always automatically expanded to your home directory path.
+        In fact, using \enquote{\texttt{\(\sim \)}}, the absolute paths in \cref{listing:absolutepaths} can be rewritten more succinctly as shown in \cref{listing:absolutepathswithtilde}.
+        \begin{bashoutput}[label=listing:absolutepathswithtilde]{Examples of shortened absolute paths in Linux.}
+          ~/../../
+          ~/
+          ~/workshop
+          ~/Documents/Literature_Review
+          ~/Calculations/project_1/results.txt
+        \end{bashoutput}
+
+      \subsubsection{Moving between directories}
+        Now that you are familiar with the ways paths to files and directories are specified, it is straightforward to navigate between them.
+        The most important command that you will use over and over again is the \enquote{\texttt{cd}} command, which stands for \enquote{change directory}.
+        This command changes your current directory to whatever directory you specify, using its absolute or relative path.
+        You will get an error if the directory you are trying to change into cannot be found, either because it does not exist or because you have specified a wrong address.
+
+        If you are not sure what your current directory is, you can use the command \enquote{\texttt{pwd}}, which stands for \enquote{present working directory}.
+        However, most command-line shell prompts do tell you your current directory, but this is not always true because it depends on how the shells have been set up.
+        \Cref{listing:movingdirexamples} shows an example of how \enquote{\texttt{cd}} and \enquote{\texttt{pwd}} are used together.
+
+        \begin{bashoutput}[label=listing:movingdirexamples]{Navigating directories.}
+          user@computer:~/workshop$ pwd
+          /home/user/workshop
+
+          user@computer:~/workshop$ cd ./Test_Directory
+
+          user@computer:~/workshop/Test_Directory$ pwd
+          /home/user/workshop/Test_Directory
+
+          user@computer:~/workshop/Test_Directory$ cd ../
+
+          user@computer:~/workshop$ pwd
+          /home/user/workshop
+
+          pcyaa1@computer:~/workshop$ cd ~/Documents/Literature_Review/
+
+          user@computer:~/Documents/Literature_Review$ pwd
+          /home/user/Documents/Literature_Review
+        \end{bashoutput}
+
+
+    \subsection{Exercise}
+
+      We conclude this \namecref{sec:filedir} with an exercise that aims to set you up for the rest of the workshop.
+      Please follow through \cref{task:makeFolders} carefully to make sure the required files are available for later.
+
+      \begin{task}[label=task:makeFolders]{Creating a working directory for the workshop}
+        \small
+        \begin{enumerate}[label=(\alph*)]
+          \item Create a directory in your home directory and call it \texttt{workshop}.
+          \item Move into the \texttt{workshop} directory and create the following blank files: \texttt{H2O.crd}, \texttt{QChem.inp}, and \texttt{submission.sh}.
+          \item Create a directory called \texttt{calculations} within the \texttt{workshop} directory.
+          \item Edit the \texttt{H2O.crd} file so that it contains the lines from \cref{listing:H2O}.
+          \item Edit the \texttt{submission.sh} file so that it contains the lines from \cref{listing:SLURM}.
+        \end{enumerate}
+      \end{task}
+
+    \readtextfile[label=listing:H2O]{Coordinate file}{\texttt{H2O.crd} file contents.}{codesnippets/H2O.crd}
+
+    \readslurmscript[label=listing:SLURM]{A template \texttt{SLURM} submission script.}{codesnippets/submission.sh}

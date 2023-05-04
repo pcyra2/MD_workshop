@@ -1,0 +1,811 @@
+% ========
+% Preamble
+% ========
+
+% -----
+% Class
+% -----
+\documentclass[%
+  paper=a4,%
+  11pt,%
+  oneside,%
+  DIV=10,%
+  BCOR=0mm,%
+  headinclude=true,%
+  headings=optiontoheadtoc,%
+  headsepline=true,%
+  footinclude=false,%
+  parskip=half,%
+  listof=leveldown,%
+  captions=tableheading,%
+  toc=sectionentrywithdots,%
+%  draft,%
+]{scrartcl}
+
+
+% -----------
+% Page layout
+% -----------
+% Customise spacing between lines
+\usepackage{setspace}
+\onehalfspacing
+\setlength{\parindent}{1.5em}
+
+% Afterpage flushing of floats
+\usepackage{afterpage}
+
+% Headers and footers
+\usepackage[automark]{scrlayer-scrpage}
+\pagestyle{scrheadings}
+\automark[subsection]{section}
+\clearpairofpagestyles
+\ihead{\headmark}
+\ohead{\pagemark}
+\ofoot[\pagemark]{}
+
+
+% TOC
+\usepackage{multicol}
+\BeforeStartingTOC[toc]{\begin{multicols}{2}}
+\AfterStartingTOC[toc]{\end{multicols}}
+\setlength{\columnseprule}{.5pt}
+\setlength\columnsep{30pt}
+\setcounter{tocdepth}{2}
+
+% Landscape
+\usepackage{lscape}
+
+% -------------
+% Maths support
+% -------------
+% Load maths packages
+%% Typical packages
+\usepackage{%
+  amsmath,%
+  amsthm,%
+  amssymb,%
+  mathrsfs,%
+  mathtools,%
+  gensymb,%
+  braket,%
+  mleftright,%
+  xfrac,%
+  interval,%
+  rotating,%
+  tabstackengine,%
+}
+
+% Settings for packages
+%% interval: change open fences to round brackets
+\intervalconfig{soft open fences}
+
+%% mleftright: redefine \left as \mleft and \right as \mright
+\mleftright
+
+%% amsmath: equation numbering by section
+\numberwithin{equation}{section}
+
+%% tabstackengine
+\TABstackMath
+\TABbinary
+
+
+% ------------------
+% Scientific support
+% ------------------
+% Chemistry
+\usepackage[version=4]{mhchem}
+
+% Scientific typesetting
+\usepackage{siunitx}
+\DeclareSIUnit{\atomicunits}{a.u.}
+
+% Lists
+\usepackage[inline]{enumitem}
+
+
+% ----------
+% Typography
+% ----------
+% Context-sensitive quotation marks
+\usepackage[english=british]{csquotes}
+
+% Micro-typography
+\usepackage[%
+  activate={true, nocompatibility},%
+  final,%
+  tracking=true,%
+  factor=1100,%
+]{microtype}
+
+% Reduce spacing between sc characters
+\SetTracking{encoding={*}, shape=sc}{40}
+
+% Disable -- and --- ligatures for tt family
+\DisableLigatures[-,>,']{encoding=*, family=tt*}
+
+% -------------------
+% Font configurations
+% -------------------
+% Font support
+\usepackage[tuenc, no-math]{fontspec}
+\defaultfontfeatures{%
+%  Ligatures=TeX,%
+%  Numbers=Lining,%
+}
+
+% Main font selection
+\setmainfont{Alegreya}[%
+  Renderer=OpenType,
+  Ligatures=TeX
+]
+% Renderer=Basic is needed to disable -- ligatures for tt family
+\setmonofont[Renderer=OpenType]{Ubuntu Mono}
+
+% Maths font selection
+\usepackage[%
+  math-style=ISO,%
+  bold-style=ISO,%
+  warnings-off={mathtools-colon},%
+]{unicode-math}
+\setmathfont{STIX Two Math}
+
+% Bold version
+\setmathfont{STIX Two Math}[%
+  version=bold,%
+  FakeBold=3.3,%
+]
+
+% Stylistic set selection for script variant
+\setmathfont{STIX Two Math}[%
+  range={scr, bfscr},%
+  StylisticSet=1,%
+]
+
+% New font family
+\newfontfamily\alegreyalocal{Alegreya}[Renderer=OpenType]
+\newfontfamily\alegreyasclocal{Alegreya SC}[Renderer=OpenType]
+
+%% Scale maths script and scriptscript sizes for text size 8
+%\DeclareMathSizes{8}{8}{5.5}{5}
+%
+%% Avoid font size substitution with xfrac
+%\usepackage{anyfontsize}
+
+
+% ----------------
+% Language support
+% ----------------
+% polyglossia requires fontspec
+\usepackage{polyglossia}
+\setmainlanguage[variant=british]{english}
+
+% Date and time format
+\usepackage{datetime}
+\newdateformat{monthyeardate}{%
+  \monthname[\THEMONTH] \THEYEAR
+}
+
+
+% -------
+% Colours
+% -------
+\usepackage[svgnames, x11names, luatex, rgb]{xcolor}
+
+% Colour aliases
+\colorlet{LinkColour}{DarkCyan!50!Black}
+\colorlet{PartColour}{Blue4!70!Black}
+\colorlet{SectionColour}{DodgerBlue4}
+\colorlet{SubsectionColour}{DodgerBlue3}
+\colorlet{SubsubsectionColour}{DodgerBlue2}
+\colorlet{ParagraphColour}{DodgerBlue1!70!Black}
+\colorlet{HeaderFooterColour}{DeepSkyBlue4!70!Black}
+
+
+% --------
+% Diagrams
+% --------
+% Graphics
+\usepackage{graphicx}
+
+% TikZ & PGFPlots
+\usepackage{pgfplots}
+
+% Set up tikzexternalize
+\usetikzlibrary{external}
+\tikzexternalize
+\newif\iftikzex
+\ifdefined\notikzex
+  \tikzexfalse
+\else
+  \tikzextrue
+\fi
+\tikzexternaldisable
+
+\pgfplotsset{compat=1.17}
+
+\usetikzlibrary{%
+  calc,%
+  luamath,%
+  math,%
+  positioning,%
+  decorations.pathreplacing,%
+  arrows.meta,%
+  3d,%
+  backgrounds,%
+  patterns,%
+}
+
+\usepgfplotslibrary{%
+  groupplots,%
+  patchplots,%
+  colormaps,%
+}
+
+\pgfplotscreateplotcyclelist{coloronly}{%
+  {red},%
+  {blue},%
+  {black!60!green},%
+  {black!20!orange},%
+  {green!30!brown},%
+  {blue!40!red},%
+  {black!60!blue},%
+  {black!40!yellow},%
+  {red!50!pink},%
+  {green!70!blue},%
+}
+
+% Command for tikzexternalize/includegraphics
+\makeatletter
+\newcommand*{\useexternalfile}[4]{
+  \iftikzex
+    \tikzsetnextfilename{tikzoutput/#4-output}
+    \scalebox{#1}{\input{\tikzexternal@filenameprefix#4.tikz.tex}}
+  \else
+    \includegraphics[scale=#1, trim=#2 0 #3 0]{\tikzexternal@filenameprefix tikzoutput/#4-output.pdf}
+  \fi
+}
+\makeatother
+
+% Plot conditionals
+\usepackage{xifthen}
+
+% Float positioning
+\usepackage{placeins}
+
+% ------
+% Tables
+% ------
+\usepackage{%
+  booktabs,%
+  multirow,%
+  tabularx,%
+  makecell,%
+  pbox,%
+  bigdelim,%
+  array,%
+}
+\usepackage[export]{adjustbox}
+
+% --------
+% Captions
+% --------
+% Bold pre-texts in captions
+\usepackage[%
+  format=plain,%
+  font={small, stretch=1.1},%
+  labelfont=bf,%
+  skip=5pt,%
+]{caption}
+
+% Subcaption support
+\usepackage[%
+  labelfont=rm,%
+  subrefformat=parens,%
+]{subcaption}
+
+\captionsetup[subfigure]{justification=centering}
+\captionsetup[subtable]{justification=centering}
+
+
+% ------------------------
+% References & bookmarking
+% ------------------------
+% Footnotes
+\usepackage[perpage]{footmisc}
+\renewcommand{\thefootnote}{\alph{footnote}}
+
+% Footnote kerning with punctuation
+% Do not use with option multiple for footmisc since this package has a different way of handling multiple footnotes.
+\usepackage{fnpct}
+
+% Bibliography
+\usepackage[%
+  sorting=none,%
+  style=science,%
+  articletitle=true,%
+  autopunct=true,%
+  autocite=superscript,%
+  doi=true,%
+  dateabbrev=true,%
+  url=true,%
+  isbn=false,%
+  backend=biber,%
+]{biblatex}
+%\addbibresource{bib/hx_magnetic_symmetry.bib}
+
+%% Allow breaks in DOI
+\setcounter{biburlnumpenalty}{100}
+\setcounter{biburllcpenalty}{9000}
+
+
+%% biblatex: new cite command to combine \citeauthor and \autocite
+\newcommand*{\authorcite}[1]{\citeauthor{#1}\autocite{#1}}
+
+% Bookmarking
+%% hyperref must be loaded last, but before glossaries.
+\usepackage[%
+  hyperfootnotes=false,%
+  hypertexnames=false,%
+  hidelinks,%
+]{hyperref}
+\hypersetup{%
+  bookmarksnumbered=true,%
+  colorlinks=true,%
+  citecolor=LinkColour,%
+  linkcolor=LinkColour,%
+}
+
+% Cross-referencing
+% cleveref must be loaded after hyperref
+\usepackage[noabbrev, capitalise]{cleveref}
+
+% ---------------
+% List of symbols
+% ---------------
+% Load the glossaries package (after hyperref)
+\usepackage[%
+  symbols,% create list of symbols
+  abbreviations,% create list of abbreviations
+  nomain,%
+  nonumberlist,%
+  nogroupskip,%
+  nopostdot,%
+  automake%
+]{glossaries-extra}
+
+% Set acronym style
+\setabbreviationstyle{long-short}
+
+% Display glossaries in columns
+\usepackage{glossary-mcols}
+
+\setlength{\glsdescwidth}{\hsize}
+\newglossarystyle{listofsymbolsstyle}{%
+  \glossarystyle{list}%
+  \renewcommand*{\glossaryentryfield}[5]{%
+    \item[\glsentryitem{##1}\glstarget{##1}{##2}]%
+    \hspace{0.5cm}##3\glspostdescription\space ##5}%
+}
+
+% Compute the widest entry just for the current glossary
+\renewcommand{\glossarypreamble}{%
+  \setlength{\parskip}{3pt}%
+}
+\glssetwidest[1]{symb:elecwfdet}
+
+% Create an "ignored" list of symbols that will not be printed out
+\newglossary[glignoredl]{ignored}{glignored}{glignoredin}{Ignored Glossary}
+
+% Hyphenated long forms
+\glsaddkey
+  {hyphenated}        % new key
+  {\relax}            % default value if "hyphenated" isn't used in \newglossaryentry
+  {\glsentryhyphx}    % analogous to \glsentrytext
+  {\Glsentryhyphx}    % analogous to \Glsentrytext
+  {\glshyphx}         % analogous to \glstext
+  {\Glshyphx}         % analogous to \Glstext
+  {\GLShyphx}         % analogous to \GLStext
+\newcommand{\GENglspostlinkhook}{%
+  \ifglsused{\glslabel}{}{ (\glsentryshort{\glslabel})}\glsunset \glslabel}
+\makeatletter
+\newcommand\metadef[1]{%
+  \expandafter\newcommand\csname gls#1\endcsname{%
+    \@ifstar{\csname sgls#1\endcsname}{\csname ngls#1\endcsname}%
+  }
+  \@namedef{sgls#1}##1{{\let\glspostlinkhook \GENglspostlinkhook\expandafter\csname gls#1x\endcsname*{##1}}}%
+  \@namedef{ngls#1}##1{{\let\glspostlinkhook \GENglspostlinkhook\expandafter\csname gls#1x\endcsname{##1}}}%
+  \expandafter\newcommand\csname Gls#1\endcsname{%
+    \@ifstar{\csname sGls#1\endcsname}{\csname nGls#1\endcsname}%
+  }
+  \@namedef{sGls#1}##1{{\let\glspostlinkhook \GENglspostlinkhook\expandafter\csname Gls#1x\endcsname*{##1}}}%
+  \@namedef{nGls#1}##1{{\let\glspostlinkhook \GENglspostlinkhook\expandafter\csname Gls#1x\endcsname{##1}}}%
+  \expandafter\newcommand\csname GLS#1\endcsname{%
+    \@ifstar{\csname sGLS#1\endcsname}{\csname nGLS#1\endcsname}%
+  }
+  \@namedef{sGLS#1}##1{{\let\glspostlinkhook \GENglspostlinkhook\expandafter\csname GLS#1x\endcsname*{##1}}}%
+  \@namedef{nGLS#1}##1{{\let\glspostlinkhook \GENglspostlinkhook\expandafter\csname GLS#1x\endcsname{##1}}}%
+}
+\makeatother
+
+\metadef{hyph}
+
+
+\makeglossaries
+%\loadglsentries{symbols/symbols}
+\loadglsentries{symbols/acronyms}
+
+
+% ---------------
+% Design features
+% ---------------
+% Counter depth
+\setcounter{secnumdepth}{\subsubsectionnumdepth}
+% Heading styles
+%% Remove all end-of-counter dots
+\renewcommand*{\autodot}{}
+
+%% Use alphabets for subsubsection
+\renewcommand\thesubsection{\thesection.\alph{subsection}}
+\renewcommand\thesubsubsection{\thesubsection.\roman{subsubsection}}
+
+%% KOMA-Script markups: adjust fonts and colours
+\addtokomafont{disposition}{\alegreyalocal}
+\addtokomafont{part}{\alegreyasclocal\Huge\color{PartColour}}
+\addtokomafont{partnumber}{\alegreyasclocal\color{PartColour}}
+\addtokomafont{section}{\Large\color{SectionColour}}
+\addtokomafont{subsection}{\color{SubsectionColour}}
+\addtokomafont{subsubsection}{\color{SubsubsectionColour}}
+\addtokomafont{paragraph}{\itshape\color{ParagraphColour}}
+\addtokomafont{subparagraph}{\bfseries}
+
+%% KOMA_Script headers and footers: adjust fonts and colours
+\addtokomafont{pageheadfoot}{\alegreyalocal\color{HeaderFooterColour}}
+\addtokomafont{headsepline}{\color{HeaderFooterColour}}
+\addtokomafont{pagenumber}{\alegreyalocal\color{HeaderFooterColour}}
+
+
+
+%% Put section numbers in the margin
+\renewcommand*{\sectionformat}{%
+  \llap{\thesection\autodot\enskip}%
+}
+
+%% Put subsection numbers in the margin
+\renewcommand*{\subsectionformat}{%
+  \llap{\thesubsection\autodot\enskip}%
+}
+
+%% Put subsubsection numbers in the margin
+\renewcommand*{\subsubsectionformat}{%
+  \llap{\thesubsubsection\autodot\enskip}%
+}
+
+
+%% Adjust spacing around headings
+\RedeclareSectionCommand[%
+  afterskip=.25\baselineskip,%
+]{section}
+\RedeclareSectionCommand[%
+  beforeskip=-.1\baselineskip,%
+  afterskip=.1\baselineskip,%
+]{subsection}
+\RedeclareSectionCommand[%
+  beforeskip=-.1\baselineskip,%
+  afterskip=.1\baselineskip,%
+]{subsubsection}
+\RedeclareSectionCommand[%
+  beforeskip=-.1\baselineskip,%
+  afterskip=.1\baselineskip,%
+]{paragraph}
+
+
+% ---------------
+% Special symbols
+% ---------------
+% Operators
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\Ln}{Ln}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\Sym}{Sym}
+\DeclareMathOperator{\Arg}{Arg}
+
+% Commands
+%% Differential operator
+\newcommand*{\D}{\symup{d}}
+
+%% Transpose
+\newcommand*{\T}{\symsfup{T}}
+
+%% Vector operator
+\newcommand*{\vecop}[1]{\hat{\symbfit{#1}}}
+
+%% Latin abbreviations
+\usepackage{xspace}
+\newcommand*{\eg}{\textit{e.g.}\@\xspace}
+\newcommand*{\ie}{\textit{i.e.}\@\xspace}
+\newcommand*{\ca}{\textit{ca.}\@\xspace}
+\newcommand*{\cf}{\textit{cf.}\@\xspace}
+
+\makeatletter
+\newcommand*{\etc}{%
+    \@ifnextchar{.}%
+        {\textit{etc}}%
+        {\textit{etc}.\@\xspace}%
+}
+\makeatother
+
+
+
+% ------------------------------
+% Code listings and other frames
+% ------------------------------
+% Frames and boxes
+\usepackage[most]{tcolorbox}
+
+\tcbuselibrary{%
+  minted,%
+  breakable
+}
+
+%\usepackage{upquote}
+
+% Non-copyable texts in PDF
+\usepackage{%
+  accsupp,%
+}
+
+\newcommand*{\noncopy}[1]{
+  \BeginAccSupp{method=escape, ActualText={}}
+  #1
+  \EndAccSupp{}
+}
+
+% Listings environments
+
+%% Minted style
+\usemintedstyle{default}
+
+%% Non-copyable line numbers
+\renewcommand{\theFancyVerbLine}{\tiny\ttfamily\noncopy{\arabic{FancyVerbLine}}}
+
+%% Non-copyable shell prompts
+\newcommand{\LineWithPrompt}{%
+  \def\FancyVerbFormatLine##1{\textcolor{red}{\noncopy{\$}}##1}%
+}
+
+%% Shell command environment
+\NewTCBListing[%
+  auto counter,%
+  number within=section,%
+  Crefname={Listing}{Listings},%
+]{bashcmd}{ s O{} m }{%
+%  breakable,%
+  enhanced,%
+  colback=Seashell,%
+  colframe=Grey!30!black,%
+  listing only,%
+  before skip balanced=0pt,%
+  comment above* listing,%
+  IfBooleanTF={#1}
+    {}%
+    {comment={\centering \textbf{Listing~\thetcbcounter:} #3\nopagebreak}},%
+  left=3pt,%
+  right=27pt,%
+  listing engine=minted,%
+  minted language=bash,%
+  minted options={%
+    breaklines,%
+    autogobble,%
+    stripall,%
+    formatcom=\LineWithPrompt,%
+    breaksymbolleft=\textcolor{gray}{\ensuremath{\noncopy{\hookrightarrow}}},%
+    breaksymbolright=\textcolor{gray}{\ensuremath{\noncopy{\hookleftarrow}}},%
+  },%
+  title={\noncopy{\texttt{bash} command}},%
+  #2
+}
+
+%% Shell output environment
+\NewTCBListing[%
+  use counter from=bashcmd,%
+  Crefname={Listing}{Listings},%
+]{bashoutput}{ s O{} m }{%
+  enhanced,%
+  colback=PapayaWhip,%
+  colframe=Grey!30!black,%
+  listing only,%
+  before skip balanced=0pt,%
+  comment above* listing,%
+  IfBooleanTF={#1}
+    {}%
+    {comment={\centering \textbf{Listing~\thetcbcounter:} #3\nopagebreak}},%
+  left=3pt,%
+  right=3pt,%
+  listing engine=minted,%
+  minted language=bash,%
+  minted options={%
+    breaklines,%
+    autogobble,%
+    stripall,%
+    breaksymbolleft=\textcolor{gray}{\ensuremath{\noncopy{\hookrightarrow}}},%
+    breaksymbolright=\textcolor{gray}{\ensuremath{\noncopy{\hookleftarrow}}},%
+  },%
+  title={\noncopy{\texttt{bash} output}},%
+  #2
+}
+
+%% Slurm file environment
+% \readslurmscript[<options>]{caption}{filepath}
+\NewTCBInputListing[%
+  use counter from=bashcmd,%
+  Crefname={Listing}{Listings},%
+]{\readslurmscript}{ O{} m v }{%
+%  breakable,%
+  enhanced,%
+  colback=Cornsilk,%
+  colframe=Grey!30!black,%
+  listing only,%
+  before skip balanced=0pt,%
+  comment above* listing,%
+  comment={\centering \textbf{Listing~\thetcbcounter:} #2\nopagebreak},%
+  left=3pt,%
+  right=3pt,%
+  listing engine=minted,%
+  minted language=slurm,%
+  minted options={%
+    breaklines,%
+    autogobble,%
+    stripall,%
+    linenos,%
+    numbersep=3mm,%
+    breaksymbolleft=\textcolor{gray}{\ensuremath{\noncopy{\hookrightarrow}}},%
+    breaksymbolright=\textcolor{gray}{\ensuremath{\noncopy{\hookleftarrow}}},%
+  },
+  listing file={#3},%
+  title={\noncopy{\texttt{SLURM} submission script:}\texttt{#3}},%
+  #1
+}
+
+%% Shell script environment
+% \readbashscript[<options>]{caption}{filepath}
+\NewTCBInputListing[%
+  use counter from=bashcmd,%
+  Crefname={Listing}{Listings},%
+]{\readbashscript}{ O{} m m }{%
+  breakable,%
+  enhanced,%
+  colback=Cornsilk,%
+  colframe=Grey!30!black,%
+  listing only,%
+  before skip balanced=0pt,%
+  comment above* listing,%
+  comment={\centering \textbf{Listing~\thetcbcounter:} #2\nopagebreak},%
+  left=3pt,%
+  right=3pt,%
+  listing engine=minted,%
+  minted language=bash,%
+  minted options={%
+    breaklines,%
+    autogobble,%
+    stripall,%
+    linenos,%
+    numbersep=3mm,%
+    breaksymbolleft=\textcolor{gray}{\ensuremath{\noncopy{\hookrightarrow}}},%
+    breaksymbolright=\textcolor{gray}{\ensuremath{\noncopy{\hookleftarrow}}},%
+  },
+  listing file={#3},%
+  title={\noncopy{\texttt{bash} script:}\texttt{#3}},%
+  #1
+}
+
+%% Generic text file environment
+% \readbashscript[<options>]{file type}{caption}{filepath}
+\NewTCBInputListing[%
+  use counter from=bashcmd,%
+  Crefname={Listing}{Listings},%
+]{\readtextfile}{ O{} m m m }{%
+  breakable,%
+  enhanced,%
+  colback=Cornsilk,%
+  colframe=Grey!30!black,%
+  listing only,%
+  before skip balanced=0pt,%
+  comment above* listing,%
+  comment={\centering \textbf{Listing~\thetcbcounter:} #3\nopagebreak},%
+  left=3pt,%
+  right=3pt,%
+  listing engine=minted,%
+  minted language=text,%
+  minted options={%
+    breaklines,%
+    autogobble,%
+    stripall,%
+    linenos,%
+    numbersep=3mm,%
+    breaksymbolleft=\textcolor{gray}{\ensuremath{\noncopy{\hookrightarrow}}},%
+    breaksymbolright=\textcolor{gray}{\ensuremath{\noncopy{\hookleftarrow}}},%
+  },
+  listing file={#4},%
+  title={\noncopy{#2:}\texttt{#4}},%
+  #1
+}
+
+%% Task environment
+\DeclareTColorBox[%
+  auto counter,%
+  number within=section,%
+  Crefname={Task}{Tasks},%
+]{task}{ O{} m }{%
+  enhanced,%
+%  breakable,%
+  title={Task~\thetcbcounter: #2\nopagebreak},%
+  colframe=Grey!10!black,%
+  colback=LightGoldenrod1,%
+  colbacktitle=DarkGoldenrod1,%
+  fonttitle=\bfseries,%
+  coltitle=black,%
+  left=3pt,%
+  right=6pt,%
+  top=12pt,%
+  attach boxed title to top left={%
+    xshift=9mm,%
+    yshift=-0.25mm-\tcboxedtitleheight/2,%
+    yshifttext=2mm-\tcboxedtitleheight/2,%
+  },%
+  boxed title style={%
+    boxrule=0.5mm,
+    frame code={%
+      \path[tcb fill frame] ([xshift=-4mm]frame.west)
+-- (frame.north west) -- (frame.north east) -- ([xshift=4mm]frame.east)
+-- (frame.south east) -- (frame.south west) -- cycle;%
+    },%
+    interior code={%
+      \path[tcb fill interior] ([xshift=-2mm]interior.west)
+-- (interior.north west) -- (interior.north east)
+-- ([xshift=2mm]interior.east) -- (interior.south east) -- (interior.south west)
+-- cycle;%
+    }%
+  },%
+  #1
+}
+
+%% Input file environment
+\NewTCBListing[%
+  auto counter,%
+  number within=section,%
+  Crefname={File}{Files},%
+]{inpfile}{ O{} m m}{%
+  breakable,%
+  enhanced,%
+  colback=Seashell,%
+  colframe=Grey!30!black,%
+  listing only,%
+%  before skip balanced=0pt,%
+  comment above* listing,%
+  comment={\centering \textbf{File~\thetcbcounter:} #2},%
+  left=3pt,%
+  right=3pt,%
+  listing engine=minted,%
+  minted language=text,%
+  minted options={%
+    breaklines,%
+    autogobble,%
+    stripall,%
+    breaksymbolleft=\textcolor{gray}{\ensuremath{\noncopy{\hookrightarrow}}},%
+    breaksymbolright=\textcolor{gray}{\ensuremath{\noncopy{\hookleftarrow}}},%
+  },%
+  title={\noncopy{\texttt{#3} file}},%
+  #1
+}
+
+% -----------
+% KOMA-Script
+% -----------
+% scrhack to prevent KOMA's "\float@addtolists detected!"
+\usepackage{scrhack}
+% Recalculate page margin based on loaded font
+\recalctypearea

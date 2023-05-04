@@ -1,0 +1,68 @@
+\subsection{Free Energy calculation}
+    \paragraph{}
+    There are many different ways of calculating the Gibbs free energy of binding for a ligand into a protein, however the simplest and cheapest way is to use either the \gls{acr:gbsa} or \gls{acr:pbsa} method. The scientific theory behind these methods can be found in \cref{subsection:pbsa-theory}.
+
+    \paragraph{}
+    There are two ways to run a \gls{acr:gbsa}  or \gls{acr:pbsa} calculation. There are two ways of performing these types of calculations, as you can either 3 independent simulations of the ligand, protein and complex in order to calculate the $\Delta G$\textsubscript{Solv, Lig.}, $\Delta G$\textsubscript{Solv, Rec.} and $\Delta G$\textsubscript{Solv, Complex} directly, and the $\Delta G$\textsubscript{Vaccum, Bind.} is calculated as the interactions between the ligand and protein from the complex simulation. The other way of performing this calculation however, is to perform a single simulation of the complexed system. It is then possible to separate each of the energies out post-hoc. Advantages of this method are that it only requires a single simulation, meaning it is much less computationally intensive so you can potentially run a longer simulation. This type of calculation also has been shown to increase accuracy. Due to the ease and accuracy of the single simulation method, we are going to use this for calculating the binding energy of the ligand. 
+
+    \subsubsection{Setup}
+    \paragraph{}
+    Firstly, you need to copy the production-dynamics trajectory file from the previous task to the \enquote{Free\_Energy}s directory, along with the parameter file for the solvated complex. You should then rename the parameter file to indicate that it is solvated, as you are about to remove the solvent in the next step. You can then use the \texttt{ante-MMPBSA.py} script to prepare the stripped parameter files for the complex, receptor and ligand respectively. 
+    
+    \begin{bashcmd}[label=listing:gbsa-init]{Commands to setup the GBSA calculation.}
+    ante-MMPBSA.py -p SOLVATED_COMPLEX.parm7 -c complex.parm7 -r receptor.parm7 -l ligand.parm7 -s :WAT,Na+ -n :LIGAND_NAME --radii=mbondi2
+    \end{bashcmd}
+
+    \paragraph{}
+    The input variables for the \texttt{ante-MMPBSA.py} are as follows:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{@{}cll@{}}
+\toprule
+\multicolumn{1}{l}{\textbf{Option}} & \textbf{Value}    & \textbf{Type} \\ \midrule
+-p      & Solvated complex parameter file               & Input         \\
+-c      & Stripped complex parameter file               & Output        \\
+-r      & Stripped receptor/protein parameter file      & Output        \\
+-l      & Stripped ligand parameter file                & Output        \\
+-s      & Strip mask for the solvent and counter ions.  & Variable      \\
+-radii  & Atomic Radii parameter set                    & Variable      \\ 
+\bottomrule
+\end{tabular}
+\end{table}
+
+    \subsubsection{Calculation}
+    \paragraph{}
+    Once the stripped parameter files are generated, one final input file is required in order to run the \gls{acr:gbsa} or \gls{acr:pbsa} calculation. This file has a similar format to the input files used by \texttt{sander} and other AMBER programs.
+
+    \begin{inpfile}[label=file:pbsa]{Input file for required for the \gls{acr:gbsa} program.}{MMPBSA.py}
+GBSA input file
+&general
+        startframe=1, endframe=100000, interval=10, \\ This allows you to speed up the calculation by only calculating every n bins.
+        strip_mask=:WAT:Na+, \\ The AMBER mask for the solvent and counter ions stripped in the previous step.
+        keep_files=0, \\ Delete temporary files after the calculation completes.
+/
+&gb
+        igb=2, \\ Specifies the generalised Born method to use.
+        saltcon=0.100, \\ Salt concentration for the implicit solvent (M)
+/
+    \end{inpfile}
+
+    \paragraph{}
+    Once all the files are in place, the \gls{acr:gbsa} calculation can begin. Use the following command with your file names to run the calculation. Make sure you change the variables: 
+    \begin{itemize}
+        \item \texttt{NUM\_PROCESSORS} to the number of available threads on your machine
+        \item \texttt{INPUT\_FILE} to the name of your newly created \gls{acr:gbsa} input file
+        \item \texttt{SOLVATED\_COMPLEX} to the name of your original solvated complex parameter file
+        \item \texttt{PRODUCTION\_TRAJECTORY} to the name of the production trajectory file
+    \end{itemize}
+
+    \paragraph{}
+
+    \begin{bashcmd}[label=listing:gbsa-run]{Commands to run the GBSA calculation.}
+    mpirun -np NUM_PROCESSORS MMPBSA.py.MPI -O -i INPUT_FILE.in -o gb_results.dat -sp SOLVATED_COMPLEX.parm7 -cp complex.parm7 -rp receptor.parm7 -lp ligand.parm7 -y PRODUCTION_TRAJECTORY.nc
+    \end{bashcmd}
+
+    \subsubsection{Analysis}
+    \paragraph{}
+    The data from the \gls{acr:gbsa} calculation is outputted to the \enquote{gb\_results.dat} file.

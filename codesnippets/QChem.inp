@@ -1,0 +1,6 @@
+$rem
+  JOBTYPE SP
+  METHOD  HF
+  BASIS   3-21G
+  GUI     2
+$end

@@ -1,0 +1,10 @@
+\subsection{AMBER}
+    \paragraph{}
+    Install AmberTools22 using anaconda as this is the simplest way and suitable for this tutorial. 
+    \begin{bashcmd}[label=listing:AMBERINST]{Commands to install AmberTools22}
+    conda create --name AmberTools22
+        y   # proceed with creating the AmberTools22 conda environment
+    conda activate AmberTools22
+    conda install -c conda-forge ambertools=22 compilers
+        y   # proceed with installing
+    \end{bashcmd}

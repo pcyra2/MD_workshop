@@ -1,0 +1,93 @@
+% !TeX program=lualatex
+% !TeX TXS-program:bibliography=txs:///biber
+
+\input{preamble}
+
+
+%% Metadata %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \title{Molecular Dynamics Workshop}
+  \author{Ross Amory}
+  \makeatletter
+    \let\mytitle\@title
+    \let\myauthor\@author
+  \makeatother
+
+
+\begin{document}
+    \bgroup
+    \noindent
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{cc}
+            \begin{subfigure}{0.45\textwidth}\includegraphics[height = 1.5cm,left]{Graphics/UKRI_BBSR_Council-Logo_Horiz-CMYK.eps}\end{subfigure}&  
+            \begin{subfigure}{0.45\textwidth}\includegraphics[height = 1.5cm,right]{Graphics/UoN_gradient_logo_CMYK.eps}\end{subfigure}\\
+        \end{tabular}
+    \end{table}
+    \egroup
+
+  %% Title
+ \vspace{-0.5cm}
+  \noindent
+  \bgroup
+    \alegreyalocal
+    \renewcommand\arraystretch{1.5}
+      \begin{tabular*}{\linewidth}{>{\centering\arraybackslash}m{\linewidth}}
+        \hline
+        \textbf{\alegreyasclocal\Large \mytitle}\\
+        \myauthor{}\\
+        School of Chemistry, University of Nottingham\\[-8pt] 
+        \today\\
+        \hline
+      \end{tabular*}
+  \egroup
+  \thispagestyle{plain}
+
+  % TOC
+  \tableofcontents
+
+%\section{Notes to Authors}
+%
+%  Below are examples of pre-defined environments or macros.
+%  Please utilise them to make the tutorial both informative and interactive.
+%
+%  \Cref{listing:submit} is an example \texttt{SLURM} script that is read in from a file.
+%  These code snippet files will also be packaged together with the tutorial PDF, and students can use them directly without having to copy and paste from the PDF.
+%  \readbashscript[label=listing:submit]{A simple \texttt{SLURM} submission script.}{codesnippets/submit.sh}
+%
+%  \Cref{listing:scp} is an example \texttt{bash} command that is typeset directly into the \LaTeX{} document.
+%  Students can copy and paste these commands from the PDF to their shells and execute them.
+%  Note how the prompt \textcolor{red}{\noncopy{\$}}is not selectable and copyable when the PDF is opened with a good PDF viewer.
+%  \begin{bashcmd}[label=listing:scp]{A simple \texttt{scp} command with the \texttt{-r} flag.}
+%    scp -r <user>@loginchem01.nottingham.ac.uk:~/dir_1 .
+%    cd dir_1
+%    ls
+%  \end{bashcmd}
+%
+%  An example output for the above is as follows:
+%  \begin{bashoutput}[label=listing:scpoutput]{Output for the above \texttt{scp} command.}
+%    dir_2    file_1    file_3
+%    dir_3    file_2
+%  \end{bashoutput}
+%
+%  \Cref{task:test} is an example task.
+%  Tasks are essentially exercises to get students to apply the techniques or skills they have been taught in a few varied scenarios to help them reinforce their understanding.
+%  \begin{task}[label=task:test]{Test task long title}
+%    This is a test task.
+%    \begin{enumerate}[label=(\alph*)]
+%      \item subtask 1;
+%      \begin{enumerate}[label=(\roman*)]
+%        \item subsubtask 1;
+%        \item subsubtask 2.
+%      \end{enumerate}
+%      \item subtask 2.
+%    \end{enumerate}
+%  \end{task}
+
+\input{Installs/Software_Installs}
+\input{introduction/introduction}
+\input{Theory/Theory}
+\input{Tasks/Tasks}
+\input{Cheats/CheatCodes}
+
+\printglossary[type=abbreviations]
+\end{document}

@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+#SBATCH --time=
+#SBATCH --job-name=
+#SBATCH --partition=
+#SBATCH --nodes=
+#SBATCH --ntasks-per-node=
+#SBATCH --cpus-per-task=
+#SBATCH --mem=
+#SBATCH --mail-type=
+#SBATCH --mail-user=

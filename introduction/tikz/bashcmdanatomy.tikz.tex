@@ -1,0 +1,19 @@
+\begin{tikzpicture}
+  % cmd
+  \node[draw, thick, fill=Coral!70!white, minimum height=0.4cm, anchor=west, inner sep=1.5pt, rounded corners=2pt, align=center] (cmd) at (0, 0) {\texttt{cmd}\vphantom{\texttt{p}}};
+  % flags
+  \node[draw, thick, fill=Plum!70!white, minimum height=0.4cm, anchor=west, inner sep=1.5pt, rounded corners=2pt, align=center] (f1) at ($(cmd.east) + (0.2, 0)$) {\texttt{-f}\vphantom{\texttt{p}}};
+  \node[draw, thick, fill=Plum!70!white, minimum height=0.4cm, anchor=west, inner sep=1.5pt, rounded corners=2pt, align=center] (f2) at ($(f1.east) + (0.2, 0)$) {\texttt{--longflag}\vphantom{\texttt{p}}};
+  \node[anchor=west, inner sep=0pt] (e1) at ($(f2.east) + (0.2, 0)$) {\texttt{...}};
+  % param-val pairs
+  \node[draw, thick, fill=VioletRed!70!white, minimum height=0.4cm, anchor=west, inner sep=1.5pt, rounded corners=2pt, align=center] (p) at ($(e1.east) + (0.2, 0)$) {\texttt{-p}\vphantom{\texttt{f}}};
+    \node[draw, thick, fill=LightGreen!70!white, minimum height=0.4cm, anchor=west, inner sep=1.5pt, rounded corners=2pt, align=center] (v) at ($(p.east) + (0.2, 0)$) {\texttt{value}\vphantom{\texttt{p}}};
+  \node[draw, thick, fill=VioletRed!70!white, minimum height=0.4cm, anchor=west, inner sep=1.5pt, rounded corners=2pt, align=center] (param) at ($(v.east) + (0.2, 0)$) {\texttt{--param}\vphantom{\texttt{f}}};
+  \node[anchor=west, inner sep=0pt] (eq) at ($(param.east) + (0.01, 0)$) {\texttt{=}};
+  \node[draw, thick, fill=LightGreen!70!white, minimum height=0.4cm, anchor=west, inner sep=1.5pt, rounded corners=2pt, align=center] (val) at ($(eq.east) + (0.01, 0)$) {\texttt{value}\vphantom{\texttt{p}}};
+  \node[anchor=west, inner sep=0pt] (e2) at ($(val.east) + (0.2, 0)$) {\texttt{...}};
+  % args
+  \node[draw, thick, fill=Turquoise!70!white, minimum height=0.4cm, anchor=west, inner sep=1.5pt, rounded corners=2pt, align=center] (a1) at ($(e2.east) + (0.2, 0)$) {\texttt{arg1}};
+  \node[draw, thick, fill=Turquoise!70!white, minimum height=0.4cm, anchor=west, inner sep=1.5pt, rounded corners=2pt, align=center] (a2) at ($(a1.east) + (0.2, 0)$) {\texttt{arg2}};
+  \node[anchor=west, inner sep=0pt] (e3) at ($(a2.east) + (0.2, 0)$) {\texttt{...}};
+\end{tikzpicture}

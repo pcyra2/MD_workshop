@@ -1,0 +1,43 @@
+\subsection{Initial Tasks}
+    \begin{task}[label=task:setup]{Set up the directory structure for the workshop.}
+    Create directories for:
+        \begin{enumerate}[label=(\alph*)]
+            \item Structure files
+            \item Docking simulations
+            \item \gls{acr:md} simulations
+            \item Simulation analysis
+        \end{enumerate}
+    \end{task}
+
+    \paragraph{}
+    Firstly, like whenever starting any new project, a working directory needs to be created. This can be done either using the \gls{acr:cli} in a terminal using the \enquote{\texttt{mkdir}} command, or using a \gls{acr:gui} file manager. Commands to do this can be found in the cheat codes \cref{listing:task1}.
+
+\begin{bashoutput}[label=listing:folders]{Folder structure as shown by the \texttt{tree} command.}
+    MD_Workshop
+    ├── Structures
+    ├── Docking
+    ├── Dynamics
+    ├── Analysis
+    └── Free_Energy
+\end{bashoutput}
+    
+    \begin{task}[label=task:Structures]{Obtaining the structure files.}
+    \begin{enumerate}[label=(\alph*)]
+        \item Obtain the protein crystal structure
+        \begin{enumerate}[label=(\roman*)]
+            \item Visit the protein database website
+            \item Find the protein using code 1AZX
+            \item Download the crystal structure
+        \end{enumerate}
+        \item Save the ligand coordinate files located in the workshop files.
+    \end{enumerate}
+  \end{task}
+
+  \paragraph{}
+  There are a few places where you can find and store crystal structure coordinates, however the main two that are used are \href{https://www.rcsb.org/}{rscb} and \href{https://www.uniprot.org/}{uniprot}. These websites are powerful tools, and often group multiple versions of the same protein. Most proteins are published on the rscb database however for unresolved crystal structures, uniprot sometimes also contains the alphafold\cite{} homology model structure. 
+
+  \paragraph{}
+  Although we will not be covering the theory or methods of homology modelling in this workshop, being aware of the technique could potentially be useful when working with an un-resolved protein. The method allows for an approximate structure to be generated using similar proteins as templates. A homology modelling program with growing popularity is the \href{https://www.deepmind.com/research/highlighted-research/alphafold}{alphafold}\cite{} program which uses artificial intelligence to estimate a crystal structure from a FASTA sequence.
+
+  \paragraph{}
+  To start this workshop, you will need to visit the rscb website and download the \enquote{pdb} file for the antithrombin/pentasaccharide protien complex which can be found using the code 1AZX.  If you google the protein code, it usually comes up as one of the first options also. If you have any problems with this then use the commands found in the cheat codes \cref{listing:task2}.
