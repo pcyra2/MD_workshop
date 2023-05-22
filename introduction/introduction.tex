@@ -18,6 +18,8 @@
         \item Calculate the binding energy of the ligand
     \end{itemize}
 
+    \paragraph{}
+    We shall be using a recent study\cite{Zhang2017AAntithrombin} on docking and \gls{acr:gbsa} rescoring of ligands binding to Antithrombin as a basis for this workshop however our results may differ from their results due to the simplified workflow that we shall be performing.
 
 \subsection{Software}
     \paragraph{}
@@ -28,23 +30,23 @@
 \begin{itemize}
     \item \href{https://www.anaconda.com/download/}{anaconda}
     \item \href{https://learn.microsoft.com/en-us/windows/wsl/install}{WSL2} (windows only)
-    \item \href{https://ambermd.org/GetAmber.php}{AMBER} \footnote{It is recommended that you install the full (paid) version of amber for production dynamics due to the GPU support, however for individual machines and the purpose of this workshop, the conda binary distribution is okay.}
-    \item \href{https://www.ks.uiuc.edu/Development/Download/download.cgi?PackageName=VMD}{VMD}
-    \item \href{https://github.com/gnina/gnina}{gnina}
-    \item \href{https://pypi.org/project/acpype/}{acpype} \footnote{A web server version of acpype is available \href{https://www.bio2byte.be/acpype/submit/}{here} for users unable to install, however installing this is highly recommended where possible.}
+    \item \href{https://ambermd.org/GetAmber.php}{AMBER}\cite{Maier2015Ff14SB:Ff99SB} \footnote{It is recommended that you install the full (paid) version of amber for production dynamics due to the GPU support, however for individual machines and the purpose of this workshop, the conda binary distribution is okay.}
+    \item \href{https://www.ks.uiuc.edu/Development/Download/download.cgi?PackageName=VMD}{VMD}\cite{WilliamHumphrey1996VMDDynamics}
+    \item \href{https://github.com/gnina/gnina}{gnina}\cite{McNutt2021GNINALearning}
+    \item \href{https://pypi.org/project/acpype/}{acpype} \cite{SousadaSilva2012ACPYPEInterfacE} \footnote{A web server version of acpype is available \href{https://www.bio2byte.be/acpype/submit/}{here} for users unable to install, however installing this is highly recommended where possible.}
 \end{itemize}
 
     \paragraph{}
     Although not required for this workshop, some other software that is available to assist with the \gls{acr:md} workflow are as follows:
 
 \begin{itemize}
-    \item CHARMM (\gls{acr:md} package)
-    \item gromacs (Open source \gls{acr:md} package)
-    \item CGenFF (Forcefield parameterisation tool for the CHARMM forcefield)
+    \item CHARMM\cite{Brooks1983CHARMM:Calculations} (\gls{acr:md} package)
+    \item gromacs\cite{Berendsen1995GROMACS:Implementation} (Open source \gls{acr:md} package)
+    \item CGenFF\cite{Vanommeslaeghe2012AutomationTyping} (Forcefield parameterisation tool for the CHARMM forcefield)
     \item pyMol (\gls{acr:gui} for molecular visualisation and manipulation)
-    \item AutoDock4 (Open source docking software)
-    \item YASARA (\gls{acr:gui} for the whole \gls{acr:md} workflow)
-    \item Alphafold (Open source A.I. homology modelling software)
+    \item AutoDock4\cite{Morris2009AutoDock4Flexibility} (Open source docking software)
+    \item YASARA\cite{Krieger2014YASARAWorkstations} (\gls{acr:gui} for the whole \gls{acr:md} workflow)
+    \item Alphafold\cite{Jumper2021HighlyAlphaFold, Varadi2022AlphaFoldModels} (Open source A.I. homology modelling software) 
 \end{itemize}
 
 

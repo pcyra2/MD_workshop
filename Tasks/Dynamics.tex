@@ -1,1 +1,143 @@
 \subsection{Molecular Dynamics}
+
+    \begin{task}[label=task:Dynamics]{Run a molecular dynamics simulation.}
+        \begin{enumerate}[label=(\alph*)]
+            \item Generate input files for:
+            \begin{enumerate}[label=(\roman*)]
+                \item Minimisation
+                \item Heating
+                \item Equilibration
+                \item Production dynamics
+            \end{enumerate}
+            \item Run the simulations for:
+            \begin{enumerate}[label=(\roman*)]
+                \item Minimisation
+                \item Heating
+                \item Equilibration
+                \item Production dynamics
+            \end{enumerate}
+        \end{enumerate}
+    \end{task}
+
+
+    \paragraph{}
+        Once we have correctly generated our initial start coordinate system and the corresponding parameters, we can begin to run some dynamics simulations. A traditional dynamics simulation starts with a minimisation step which allows for any steric clashes or small structural problems within our initial system to be corrected before trying to introduce time. These steric clashes are very common as when you solvate the system, the water molecules are randomly placed and so can sometimes lead to problems if not fixed. It is common to run a multi-stage minimisation where you initially fix all atoms except for solvents and minimise, before slowly relaxing these restraints until a full system minimisation is performed. For the interest of time however we shall not be doing this.
+
+\begin{inpfile}[label=file:minin]{Minimisation input file.}{sander}
+initial minimisation script at 0k
+&cntrl
+  imin=1,       # initiate minimisation
+  ntx=1,        # read coordinates with no velocities
+  irest=0,      # don't restart the simulation
+  maxcyc=10000, # 10000 minimisation steps
+  ncyc=5000,    # 5000 steps of steepest gradient
+  ntpr=10,      # print to mdout every 10 steps
+  ntwx=0,       # don't print trajectory file
+  cut=8.0,      # non-bonded cut off of 8 A
+/
+
+\end{inpfile}
+
+    \paragraph{}
+        Firstly we need to create an input file that tells amber what type of calculation we want to perform. These input files have many variables, however in alot of cases the default values are fine. We will first generate a simple minimisation input file called \enquote{min.in} that should look like \cref{file:minin} and should be saved to the \texttt{Dynamics} sub directory. The \enquote{start.rst7} and \enquote{complex.parm7} files generated from the previous step should also be copied here. Finally to run the initial minimisation, use \cref{cmd:minrun}.
+        
+\begin{bashcmd}[label=cmd:minrun]{Basic amber command to run the minimisation input file}
+# If using the conda install or have no mpi compiled version:
+sander -O -i min.in -o min.out -c start.rst7 -p complex.parm7 -inf min.mdinfo -r min.ncrst
+
+# If compiled with mpi:
+mpirun -np NUM_CORES sander.MPI -O -i min.in -o min.out -c start.rst7 -p complex.parm7 -inf min.mdinfo -r min.ncrst
+
+# If using the full version of amber with GPU support:
+pmemd.cuda -O -i min.in -o min.out -c start.rst7 -p complex.parm7 -inf min.mdinfo -r min.ncrst
+### NOTE: Often the pmemd version struggles if large clashes are present. If you get an error, try switching to sander.
+\end{bashcmd}
+
+    \paragraph{}
+        It should be noted that there are two main programs for running molecular dynamics within amber: \enquote{sander} and \enquote{pmemd}. If you are using the free version of amber (AmberTools), then you will only have access to  \enquote{sander}, however if you have the full version then you will also have \enquote{pmemd}. These two programs are functionally similar, with \texttt{pmemd} being an optimised and slimmed down code which can be run on GPU's where as \texttt{sander} is less optimised however much more rigorous. Both programs can be \texttt{mpi} accelerated however, so even with the free version of amber you can run some simple dynamics simulations. Some functionality of \texttt{sander} is lost when changing to \texttt{pmemd} however so always check to see if your calculation will work with your code.
+
+    \begin{table}[H]
+    \centering
+    \begin{tabular}{@{}cll@{}}
+    \toprule
+    \multicolumn{1}{l}{\textbf{Option}} & \textbf{Value}    & \textbf{Type} \\ \midrule
+    \textendash O                                           & Overwrite previous files                  & Variable  \\
+    \textendash i                                           & Input file                                & Input     \\
+    \textendash o                                           & Main output file                          & Output    \\
+    \textendash c                                           & Simulation start coordinates              & Input     \\
+    \textendash p                                           & Parameters for your system                & Input     \\
+    \textendash inf                                         & Dynamics information about current step   & Output    \\
+    \textendash r                                           & \enquote{Restart} file for the latest coordinates to be saved   &  Output          \\
+    \textendash x                                           & \enquote{Trajectory} file for saving the coordinates every \enquote{ntwx} steps   &  Output        \\
+    \bottomrule
+    \end{tabular}
+    \label{Tab:sanderVar}
+    \caption{The input variables for sander or pmemd}
+    \end{table}
+
+
+    \paragraph{}
+        Once minimisation is complete, the next step is to heat the system. Currently the temperature is at 0 k, however we need this to be at physiological temperature. This exact temperature can vary depending on what exactly you are simulating however for this workshop we shall heat to 300 k. The temperature of the system is determined by the average kinetic energy for all atoms and is related to temperature using the Maxwell-Boltzman distribution\cite{}. The temperature of the system is controlled by a thermostat which modifies the velocities of the atoms in order to keep the system at the desired temperature. 
+
+    \paragraph{}
+        To run the heating simulation, you first need to generate the input file and this should look similar to \cref{file:heatin}. You shall notice that we are now using more variables in the \texttt{\&cntrl} section and also have introduced an \texttt{\&wt} section which allows us to vary settings throughout a simulation. Once you have generated your input file, you can run the simulation in a similar way to before, however take to use the restart file from the minimisation step as your start coordinates. You also need to define the trajectory output file for this simulation as you will be printing the trajectory (\cref{cmd:heatrun}). 
+        
+\begin{inpfile}[label=file:heatin]{Heat input file.}{sander}
+heating script from 0 k to 300 k over 200 ps
+&cntrl
+  imin=0,           # run a dynamics simulation
+  ntx=1,            # read coordinates with no velocities
+  irest=0,          # don't restart the simulation
+  nstlim=100000,    # run simulation for 100000 steps
+  dt=0.002,         # each step is separated by 0.002 ps (200 ps total)
+  ntf=2, ntc=2,     # constrain bonds with hydrogen
+  ntpr=100,         # print to mdout every 100 steps
+  ntwx=100,         # print trajectory file every 100 steps
+  cut=8.0,          # non-bonded cut off of 8 A
+  ntb=1,            # constant volume with periodic boundary conditions
+  ntp=0,            # no pressure control
+  ntt=3,            # control temperature using Langevin Dynamics
+  gamma_ln=2.0,     # Langevin collision frequency
+  nmropt=1,         # control NMR restraints
+  ig=-1,            # use a random seed
+/
+&wt type='TEMP0', istep1=0, istep2=100000, value1=0.0, value2=300.0 /
+&wt type='END' /
+# Heat the system from 0 to 300 k from step 0 to end
+\end{inpfile}
+
+\begin{bashcmd}[label=cmd:heatrun]{Basic amber command to run the heating input file}
+sander -O -i heat.in -o heat.out -c min.rst7 -p complex.parm7 -inf heat.mdinfo -r heat.ncrst -x heat.nc
+
+# You can use sander.MPI or pmemd.cuda instead of sander.
+\end{bashcmd}
+
+    \paragraph{}
+        The final two steps are to equilibrate the system, then run the simulation using the \gls{acr:nvp} ensemble. It is important to note that equilibration and production dynamics are functionally identical. The equilibration stage is simply to ensure that any of the restraints on the system that are imposed are equilibrated and representative of the real system before collecting data on them. In theory you do not need to split these into separate calculations, however it is useful for analysis as you then simply exclude equilibration data from your post-processing techniques.
+
+\begin{inpfile}[label=file:equilin]{Equil input file.}{sander}
+equilibration script at 300k for 200 ps
+&cntrl
+  imin=0,           # run a dynamics simulation
+  ntx=5,            # read coordinates with no velocities
+  irest=1,          # don't restart the simulation
+  nstlim=100000,    # run simulation for 100000 steps
+  dt=0.002,         # each step is separated by 0.002 ps (200 ps total)
+  ntf=2, ntc=2,     # constrain bonds with hydrogen
+  ntpr=100,         # print to mdout every 100 steps
+  ntwx=100,         # print trajectory file every 100 steps
+  cut=8.0,          # non-bonded cut off of 8 A
+  ntb=2,            # constant volume with periodic boundary conditions
+  ntp=1,            # pressure control
+  ntt=3,            # control temperature using Langevin Dynamics
+  barostat=1,       # Berendsen barostat for pressure control
+  gamma_ln=2.0,     # Langevin collision frequency
+  ig=-1,            # use a random seed
+  temp0=300.0       # start at 300 k
+  tempi=300.0       # end at 300 k (Constant temp)
+/
+
+\end{inpfile}
+
+    \paragraph{}
+        To run the dynamics simulation, simply copy your \enquote{equil.in} file to \enquote{prod.in} and change the number of steps from 100'000 to 500'000 steps. This will create 1 ns of production dynamics simulation in total. You can run both of these simulations in the same way as the heating simulation, remembering to change the start coordinate file to the final restart file of the previous simulation.

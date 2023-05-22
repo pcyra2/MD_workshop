@@ -1,4 +1,11 @@
 \subsection{Molecular Dynamics Preparation}
+    \begin{task}[label=task:Prep]{Preparing for a dynamics simulation.}
+        \begin{enumerate}[label=(\alph*)]
+            \item Parameterise the ligand
+            \item Generate topology and parameter files
+        \end{enumerate}
+    \end{task}
+
 \subsubsection{Parameterisation}
     \paragraph{}
         To run a molecular dynamics simulation, you first need to parameterise all of the atoms in the system. There are multiple different molecular dynamics force fields that contain standard parameters for common amino acids and some other small or simple molecules. For bigger or more complicated molecules however, you will need to create your own custom parameters. 
@@ -7,9 +14,75 @@
         Although there is a rigorous method that can be undertaken to correctly parameterise complex ligands, including comparing the parameters with ab-initio calculations, we shall be using an automated method for speed and simplicity. \footnote{You can learn more about the rigorous process of parameterisation \href{http://ambermd.org/tutorials/basic/tutorial4b/}{here}.}
 
     \paragraph{}
-        We shall be using the \texttt{acpype}\cite{} automated script to parameterise the ligands in this workshop, which combines the parameterisation tools offered by amber into a simple to use script. We shall be using \texttt{bcc} charges and the \texttt{gaff} atom typing so that it will be compatible with the \enquote{FF14SB} forcefield that we shall be using for the simulation.
+        We shall be using the \texttt{acpype}\cite{SousadaSilva2012ACPYPEInterfacE} automated script to parameterise the ligands in this workshop, which combines the parameterisation tools offered by amber into a simple to use script. We shall be using \texttt{AM1-BCC}\cite{Jakalian2002FastValidation} charges and the \texttt{gaff}\cite{Wang2004DevelopmentField} atom typing so that it will be compatible with the \enquote{FF14SB} forcefield\cite{Maier2015Ff14SB:Ff99SB} that we shall be using for the simulation. 
 
     \begin{bashcmd}[label=listing:acpypeCMD]{How to use acpype.}
         conda activate acpype
-        acpype -i LIG.pdb -c bcc -n NET_CHARGE -a gaff
+        acpype -i pose_1.mol2 -c bcc -n 1 -a gaff
     \end{bashcmd}
+
+    \paragraph{}
+        This will generate a \texttt{pose\textunderscore 1.acpype} folder containing parameter and coordinate files in a variety of different file types including those required for CHARMM\cite{Brooks1983CHARMM:Calculations} and GROMACS\cite{Berendsen1995GROMACS:Implementation}. The files that we want for this workshop however are the forcefield modification file which allows us to add parameters to the existing FF14SB\cite{Maier2015Ff14SB:Ff99SB} forcefield, as well as the \texttt{mol2} file containing the newly calculated \texttt{AM1-BCC} atomic charges. The two files should be called \texttt{pose\textunderscore 1\textunderscore AC.frcmod} and \texttt{pose\textunderscore 1\textunderscore bcc\textunderscore gaff.mol2} and should be copied into the directory above.
+
+\subsubsection{Topology and coordinate setup}
+    \paragraph{}
+        The next step in initiating any molecular dynamics simulation is to generate your coordinate and topology files that will be used in the calculation. We split topology and coordinates into two files rather than one due to the expectation that the coordinates for the atoms will change as a simulation progresses, however the parameters for each of the atoms will not. This allows for future coordinate and trajectory files to be much smaller in size due to them only containing positional information for the system.
+
+    \paragraph{}
+        Currently you have a \texttt{pdb} structure file for your protein-ligand complex and \texttt{mol2} structure file for your ligand containing charge parameters. We need to combine these files together and solvate them in order to simulate the system in biological conditions. The program that we use to do this is \texttt{tleap} which is part of the AmberTools suite of software.
+
+    \paragraph{}
+        Before running tleap however, it is important to know that it can sometimes struggle to load in a protein file that also has non-standard molecules in so it is good practice to break down the \enquote{1n23\textunderscore monomer\textunderscore NoLig.pdb} further. This can be done using a combination of \texttt{grep} to extract the coordinates of the \enquote{POP} and \enquote{MG} residues, then \texttt{pdb4amber} to strip the residues from the structure file.
+
+    \begin{bashcmd}[label=cmd:pdbamber]{}
+    pdb4amber -i 1n23_monomer_NoLig.pdb -o protein.pdb -s :MG,POP
+    \end{bashcmd}
+      
+    \paragraph{}
+        The \texttt{acpype} tool is useful for changing the atom types of other small molecules within our protein. Although the parameters for diphosphate are already know to amber, we can ensure they are used by setting the atomtype of the diphosphate molecule to \enquote{amber} and generating a new \enquote{mol2} file using these atom types. Make sure to also specify the correct charge for this molecule and then copy the \texttt{POP\textunderscore bcc\textunderscore amber.mol2} file into the working directory also.
+
+    \paragraph{}
+        Once you have split the \enquote{1n23\textunderscore monomer\textunderscore NoLig.pdb} file into the \enquote{protein.pdb}, \enquote{POP\textunderscore bcc\textunderscore amber.mol2} and \enquote{MG.pdb} files, you can then run tleap using the input \cref{file:tleap}.
+
+        \begin{inpfile}[label=file:tleap]{Input file for required for the tleap program.}{tleap}
+source leaprc.protein.ff14SB        # Loads general protein parameters
+source leaprc.water.tip3p           # Loads water parameters
+source leaprc.gaff                  # Loads "gaff" parameters
+
+LIG = loadmol2 LIG_bcc_gaff.mol2    
+# Loads the coordinates and charges for the ligand
+
+loadamberparams LIG_AC.frcmod       
+# Loads the new parameters for the ligand
+
+check LIG                           
+# Checks that all parameters are present for the ligand
+
+MG = loadpdb "MG.pdb"
+check MG
+# Loads the active site counterions
+
+POP = loadmol2 POP_bcc_amber.mol2
+check POP
+# Loads the active site diphosphate
+
+PROT = loadpdb "PROTEIN.pdb"        
+# Loads the protein structure
+
+check PROT                          
+# Checks for missing parameters for your protein
+
+COMP = combine {PROT MG POP LIG}           
+# Combines the protein and ligand
+
+solvateoct COMP TIP3PBOX 10.0        
+# Adds an octahedral box of water automatically with a minimum distance of 10 A from the protein
+
+addions COMP Na+ 0                  
+# Neutralises the net charge of the system by adding counterions
+
+saveamberparm COMP complex.parm7 start.rst7 
+#Saves parameters and initial coordinates
+
+quit
+        \end{inpfile}

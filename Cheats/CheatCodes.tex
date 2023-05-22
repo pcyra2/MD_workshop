@@ -4,8 +4,8 @@
     If you have any problems with any of the tasks within this workshop, here is a list of commands which should help you to complete the task. We recommend using this as a last resort however,
     as simply compying and pasting commands doesnt allow you to learn the methodology. 
 
-    \subsection{Initiating the file system}
-    \begin{bashcmd}[label=listing:task1]{Linux commands to initiate your local file structure.}
+    \subsection{\cref{task:setup}: Initiating the file system}
+    \begin{bashcmd}[label=cmd:task1]{Linux commands to initiate your local file structure.}
     mkdir MD_Workshop
     cd MD_Workshop
     mkdir Structures
@@ -15,9 +15,61 @@
     mkdir Free_Energy
     \end{bashcmd}
     
-    \subsection{Geting the protein structure}
-    \begin{bashcmd}[label=listing:task2]{Linux command to download the crystal structure.}
-    wget https://files.rcsb.org/download/1AZX.pdb .
+    \subsection{\cref{task:Structures}: Getting the structures}
+    \begin{bashcmd}[label=cmd:task2]{Linux commands to obtain the structures.}
+    cd Structures
+    wget https://files.rcsb.org/download/1N23.pdb
+    wget XXXX
+    grep -v " B " 1N23.pdb > 1n23_monomer.pdb
+    grep "2BN" 1n23_monomer.pdb > 2BN.pdb
+    grep -v "2BN" 1n23_monomer.pdb > 1n23_monomer_NoLig.pdb  
+    grep -v "HOH B" 1n23_monomer_NoLig.pdb > tmp
+    mv tmp 1n23_monomer_NoLig.pdb
     \end{bashcmd}
 
-    
+    \subsection{\cref{task:Docking}: Docking the ligand}
+    \begin{bashcmd}[label=cmd:task3]{How to dock the ligand into the protein}
+    cd ../Docking
+    cp ../Structures/1n23_monomer_NoLig.pdb .
+    cp ../Structures/2BN.pdb .
+    cp ../Structures/LIG.mol2 .
+    gnina -r 1n23_monomer_NoLig.pdb -l LIG.mol2 --autobox_ligand 2BN.pdb -o docked.mol2 --no_gpu
+    head -n 27 docked.mol2 > pose_1.mol2
+    obabel -imol2 pose_1.mol2 -oxyz -Opose_1.xyz -h
+    sed -i.bak -e '15d' pose_1.xyz 
+    sed -i.bak "1s/28/27/g" pose_1.xyz
+    sed -i.bak '9s/C.3/C.2/g' pose_1.mol2
+    \end{bashcmd}
+
+    \subsection{\cref{task:Prep}: Setting up a dynamics simulation}
+    \begin{bashcmd}[label=cmd:task4]{How to set up your simulations}
+    cd ../Dynamics
+    mkdir setup
+    cd setup
+    cp ../../Docking/pose_1.mol2 .
+    cp ../../Docking/1n23_monomer_NoLig.pdb .
+    conda activate acpype
+    acpype -i pose_1.mol2 -c bcc -n 1 -a gaff
+    cp pose_1.acpype/pose_1_AC.frcmod .
+    cp pose_1.acpype/pose_1_bcc_gaff.mol2 .
+    grep "POP" 1n23_monomer_NoLig.pdb > POP.pdb
+    grep "MG" 1n23_monomer_NoLig.pdb > MG.pdb
+    acpype -i POP.pdb -c bcc -n -4 -a amber
+    cp POP.acpype/POP_bcc_amber.mol2 .
+    wget XXXX
+    pdb4amber -i 1n23_monomer_NoLig.pdb -o protein.pdb -s :MG,POP
+    conda activate AmberTools
+    tleap -f leap.in
+    \end{bashcmd}
+
+    \subsection{\cref{task:Dynamics}: Running a dynamics simulations}
+    \begin{bashcmd}[label=cmd:task5]{Running the simulations}
+    cp start.rst7 ../
+    cp complex.parm7 ../
+    cd ../
+    wget XXXX
+    sander -O -i min.in -o min.out -c start.rst7 -p complex.parm7 -r min.ncrst -inf min.mdinfo
+    sander -O -i heat.in -o heat.out -c min.ncrst -p complex.parm7 -r heat.ncrst -inf heat.mdinfo -x heat.nc
+    sander -O -i equil.in -o equil.out -c heat.ncrst -p complex.parm7 -r equil.ncrst -inf equil.mdinfo -x equil.nc
+    sander -O -i prod.in -o prod.out -c equil.ncrst -p complex.parm7 -r prod.ncrst -inf prod.mdinfo -x prod.nc
+    \end{bashcmd}

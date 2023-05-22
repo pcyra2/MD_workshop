@@ -582,7 +582,7 @@
 \NewTCBListing[%
   auto counter,%
   number within=section,%
-  Crefname={Listing}{Listings},%
+  Crefname={Command}{Commands},%
 ]{bashcmd}{ s O{} m }{%
 %  breakable,%
   enhanced,%
@@ -593,7 +593,7 @@
   comment above* listing,%
   IfBooleanTF={#1}
     {}%
-    {comment={\centering \textbf{Listing~\thetcbcounter:} #3\nopagebreak}},%
+    {comment={\centering \textbf{Command~\thetcbcounter:} #3\nopagebreak}},%
   left=3pt,%
   right=27pt,%
   listing engine=minted,%
@@ -613,7 +613,7 @@
 %% Shell output environment
 \NewTCBListing[%
   use counter from=bashcmd,%
-  Crefname={Listing}{Listings},%
+  Crefname={Output}{Outputs},%
 ]{bashoutput}{ s O{} m }{%
   enhanced,%
   colback=PapayaWhip,%
@@ -623,7 +623,7 @@
   comment above* listing,%
   IfBooleanTF={#1}
     {}%
-    {comment={\centering \textbf{Listing~\thetcbcounter:} #3\nopagebreak}},%
+    {comment={\centering \textbf{Output~\thetcbcounter:} #3\nopagebreak}},%
   left=3pt,%
   right=3pt,%
   listing engine=minted,%
@@ -643,7 +643,7 @@
 % \readslurmscript[<options>]{caption}{filepath}
 \NewTCBInputListing[%
   use counter from=bashcmd,%
-  Crefname={Listing}{Listings},%
+  Crefname={Script}{Scripts},%
 ]{\readslurmscript}{ O{} m v }{%
 %  breakable,%
   enhanced,%
@@ -652,7 +652,7 @@
   listing only,%
 %  before skip balanced=0pt,%
   comment above* listing,%
-  comment={\centering \textbf{Listing~\thetcbcounter:} #2\nopagebreak},%
+  comment={\centering \textbf{Script~\thetcbcounter:} #2\nopagebreak},%
   left=3pt,%
   right=3pt,%
   listing engine=minted,%
@@ -675,7 +675,7 @@
 % \readbashscript[<options>]{caption}{filepath}
 \NewTCBInputListing[%
   use counter from=bashcmd,%
-  Crefname={Listing}{Listings},%
+  Crefname={Script}{Scripts},%
 ]{\readbashscript}{ O{} m m }{%
   breakable,%
   enhanced,%
@@ -684,7 +684,7 @@
   listing only,%
 %  before skip balanced=0pt,%
   comment above* listing,%
-  comment={\centering \textbf{Listing~\thetcbcounter:} #2\nopagebreak},%
+  comment={\centering \textbf{Script~\thetcbcounter:} #2\nopagebreak},%
   left=3pt,%
   right=3pt,%
   listing engine=minted,%
@@ -707,7 +707,7 @@
 % \readbashscript[<options>]{file type}{caption}{filepath}
 \NewTCBInputListing[%
   use counter from=bashcmd,%
-  Crefname={Listing}{Listings},%
+  Crefname={File}{Files},%
 ]{\readtextfile}{ O{} m m m }{%
   breakable,%
   enhanced,%
@@ -716,7 +716,7 @@
   listing only,%
 %  before skip balanced=0pt,%
   comment above* listing,%
-  comment={\centering \textbf{Listing~\thetcbcounter:} #3\nopagebreak},%
+  comment={\centering \textbf{File~\thetcbcounter:} #3\nopagebreak},%
   left=3pt,%
   right=3pt,%
   listing engine=minted,%
@@ -738,7 +738,7 @@
 %% Task environment
 \DeclareTColorBox[%
   auto counter,%
-  number within=section,%
+  %number within=section,%
   Crefname={Task}{Tasks},%
 ]{task}{ O{} m }{%
   enhanced,%
@@ -791,7 +791,7 @@
   left=3pt,%
   right=3pt,%
   listing engine=minted,%
-  minted language=text,%
+  minted language=bash,%
   minted options={%
     breaklines,%
     autogobble,%
