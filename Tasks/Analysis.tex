@@ -1,0 +1,216 @@
+\subsection{Analysis}
+    \begin{task}[label=task:Analysis]{Analysing the simulations}
+        \begin{enumerate}[label=(\alph*)]
+            \item Plot:
+            \begin{enumerate}[label=(\roman*)]
+                \item Energy of minimisation
+                \item Heating temperature
+            \end{enumerate}
+            \item \textcolor{Red}{Convert trajectories if on windows (optional)}
+            \item Visualise production dynamics trajectory
+        \end{enumerate}
+    \end{task}
+
+
+    \subsubsection{Basic Analysis}
+    \paragraph{}
+        To extract basic information from our dynamics output files, there are two automated tools that are provided by amber. \enquote{\texttt{process\textunderscore minout.perl}} is used exclusively for analysis of minimisation outputs and \enquote{\texttt{process\textunderscore mdout.perl}} is used for all other dynamics simulation outputs. They are both simple perl scripts that extract all of the data from within the output files and format them in plottable data files.
+
+        To use these scripts, firstly create an \enquote{analysis} directory within your \enquote{dynamics} directory. Then create a \enquote{min} directory within the \enquote{analysis} directory and move into it. From there, run the \cref{cmd:minout}.
+
+    \begin{bashcmd}[label=cmd:minout]{Running process\textunderscore mdout.perl}
+    process_minout.perl ../../min.out
+    \end{bashcmd}
+
+    \begin{bashcmd}[label=cmd:xmgrace]{Plotting a 2D graph using xmgrace (Linux)}
+        xmgrace summary.ENERGY
+    \end{bashcmd}
+
+    \paragraph{}
+        This should create a directory filled with many output files, however the file we are most interested in is the \enquote{summary.ENERGY} file. This is a data file containing the total energy of the system with respect to minimisation step. We can plot this (\cref{fig:minEnergy}) using xmgrace (\cref) to understand whether our simulation minimised sufficiently before starting dynamics simulations.
+
+    \begin{figure}
+        \centering
+            \begin{tikzpicture}
+        	\begin{axis}[
+        	title={Minimisation Energies},
+        	xlabel={Step},
+        	ylabel={Energy (kcal mol$^{-1}$)},
+        	width=0.95\textwidth,
+        	height=0.5\textheight,
+        	legend pos=outer north east,
+        	align=center,
+        %	ymin=0,
+        %	ymax=22,
+        %	xmin=1.3, xmax=3.9,
+        	]
+        	\addplot+[color=Black, mark=x, smooth] plot table [] {Data/summary.ENERGY};
+            \end{axis}
+       	\end{tikzpicture}
+        \caption{A plot of the total energy of the system with respect to minimisation steps.}
+        \label{fig:minEnergy}
+    \end{figure}
+
+    \paragraph{}
+        If your energy seems to plateau towards the end then you can assume that the simulation has sufficiently minimised and carry on with further dynamics simulations. You should note that the energy plotted here has no real-world uses and is heavily dominated by the solvent molecules in your system. Raw energy data should not be used for calculating binding of molecules.
+
+    \paragraph{}
+        Next create a \enquote{simulation} directory within your analysis section. Then run the \enquote{\texttt{process\textunderscore mdout.perl}} command in a similar way to the minout script the directory, ensuring to load the \enquote{heat.out}, \enquote{equil.out} and \enquote{prod.out} files. We are initially interested in the \enquote{summary.TEMP} which contains the temperature of the system against time in \gls{acr:ps}. This should linearly increase from 0 k to 300 k for the first 200 ps then remain constant for the rest of the simulation (\cref{fig:Temp}). This is because the equil and production simulations were run under the \gls{acr:nvt} ensemble with constant volume and temperature.
+
+    \begin{figure}[H]
+        \centering
+            \begin{tikzpicture}
+        	\begin{axis}[
+        	title={Heat against Time},
+        	xlabel={Time (\gls{acr:ps})},
+        	ylabel={Temperature (K)},
+        	width=0.95\textwidth,
+        	height=0.5\textheight,
+        	legend pos=outer north east,
+        	align=center,
+        	ymin=0,
+        	ymax=350,
+        	xmin=0, xmax=1400,
+        	]
+        	\addplot+[color=Black, mark=x, smooth] plot table [] {Data/summary.TEMP};
+            \addplot +[mark=none, color=Black!50] coordinates {(200,0) (200,4000)};
+            \addplot +[mark=none, color=Black!50] coordinates {(400,0) (400,4000)};
+            \end{axis}
+       	\end{tikzpicture}
+        \caption{A plot of the heat of the system with respect to time (\gls{acr:ps}).}
+        \label{fig:Temp}
+    \end{figure}
+
+    \paragraph{}
+        Next we are interested in seeing if the volume is constant throughout the equil and production dynamics simulations. To check this, you first need to edit the \enquote{summary.VOLUME} file and remove the first 200 ps of data. This is due to the heat simulation not containing volume information and so xmgrace cannot understand this part of the data file. Once the heating data is removed, the plot will start at a large volume and should quickly equilibrate to a constant volume. This volume should then stay constant for the rest of the simulation like in \cref{fig:Vol}. The sudden drop in volume is one of the reasons why an equilibration stage is necessary as when you initially start volume controls, the volume needs some time to equilibrate.
+
+    \begin{figure}[H]
+        \centering
+            \begin{tikzpicture}
+        	\begin{axis}[
+        	title={Volume against Time},
+        	xlabel={Time (\gls{acr:ps})},
+        	ylabel={Volume (\AA \textsuperscript{3})},
+        	width=0.95\textwidth,
+        	height=0.5\textheight,
+        	legend pos=outer north east,
+        	align=center,
+        	ymin= 530000,	ymax=620000,
+        	xmin=0, xmax=1400,
+        	]
+        	\addplot+[color=Black, mark=x, smooth] plot table [] {Data/summary.VOLUME};
+            \addplot +[mark=none, color=Black!50] coordinates {(200,0) (200,4000000)};
+            \addplot +[mark=none, color=Black!50] coordinates {(400,0) (400,4000000)};
+            \end{axis}
+       	\end{tikzpicture}
+        \caption{A plot of the volume of the system with respect to time (\gls{acr:ps}).}
+        \label{fig:Vol}
+    \end{figure}
+
+    \paragraph{}
+        Finally, you should check that the energies of the system stabilise before the production stage of the simulation. As the energy of the system is split into its constituents, you can plot the total energy, potential energy and kinetic energy and check that all three converge correctly (\cref{cmd:plt3}).
+
+    \begin{bashcmd}[label=cmd:plt3]{Plotting the energies of the system}
+        xmgrace summary.ETOT summary.EPTOT summary.EKTOT
+    \end{bashcmd}
+
+    \begin{figure}[H]
+        \centering
+            \begin{tikzpicture}
+        	\begin{axis}[
+        	title={Energy against Time},
+        	xlabel={Time (\gls{acr:ps})},
+        	ylabel={Energy (kcal mol$^{-1}$)},
+        	width=0.75\textwidth,
+        	height=0.5\textheight,
+        	legend pos=outer north east,
+        	align=center,
+        	ymin= -210000,	ymax=50000,
+        	xmin=0, xmax=1400,
+        	]
+        	\addplot+[color=Black, mark=x, smooth] plot table [] {Data/summary.ETOT};
+            \addplot+[color=Green, mark=x, smooth] plot table [] {Data/summary.EKTOT};
+            \addplot+[color=Red, mark=x, smooth] plot table [] {Data/summary.EPTOT};
+            \addplot +[mark=none, color=Black!50] coordinates {(200,-300000) (200,100000)};
+            \addplot +[mark=none, color=Black!50] coordinates {(400,-300000) (400,100000)};
+            \legend{Total Energy, Kinetic Energy, Potential Energy}
+            \end{axis}
+       	\end{tikzpicture}
+        \caption{A plot of the energy of the system with respect to time (\gls{acr:ps}).}
+        \label{fig:En}
+    \end{figure}
+
+    \subsubsection{Cpptraj}
+    \paragraph{}
+        Once you have used the automated scripts to do basic analysis of the simulations, further analysis can be performed by analysis on your trajectories. \enquote{\texttt{cpptraj}} can be used as a trajectory analysis tool and this can be run interactively in the terminal, or through use of an input file. 
+
+        One thing that is often interesting to measure is the \texttt{\gls{acr:rmsd}} of the atoms throughout the simulation. This is a way of measuring the structural change of the atoms measured with respect to a reference structure. \gls{acr:rmsd} analysis is often performed on the backbone atoms only, and can be performed in cpptraj using \cref{file:rmsd}. Cpptraj can then be run using \cref{cmd:cpptraj} and the resulting data can be plotted and should look similar to \cref{fig:RMSD}.
+
+    \begin{inpfile}[label=file:rmsd]{RMSD backbone analysis input file}{cpptraj}
+    parm ../../complex.parm7
+    # Loads the parameter file
+    
+    trajin ../../heat.nc
+    trajin ../../equil.nc
+    trajin ../../prod.nc
+    # Loads the trajectories
+
+
+    rmsd backbone_RMSD @C,CA,N out backbone_RMSD.dat 
+    run
+    \end{inpfile}
+
+    \begin{bashcmd}[label=cmd:cpptraj]{Running cpptraj with a file}
+        cpptraj cpptraj.in
+    \end{bashcmd}
+
+    \begin{figure}[H]
+        \centering
+            \begin{tikzpicture}
+        	\begin{axis}[
+        	title={RMSD against Frames},
+        	xlabel={Frame},
+        	ylabel={RMSD (\AA )},
+        	width=0.95\textwidth,
+        	height=0.5\textheight,
+        	legend pos=outer north east,
+        	align=center,
+        	ymin= 0,	ymax=1.6,
+        	xmin=0, xmax=7000,
+        	]
+        	\addplot+[color=Black, mark=x, smooth] plot table [x=Frame, y expr=\thisrow{RMSD}] {Data/backbone_RMSD.dat};
+            \end{axis}
+       	\end{tikzpicture}
+        \caption{A plot of the RMSD of the system with respect to trajectory frames.}
+        \label{fig:RMSD}
+    \end{figure}
+
+    \paragraph{}
+        It should now be noted that the x axis is no longer in units of time and instead trajectory frames. As our \enquote{ntwx} parameter was set to 100 however for the heat, equilibration and production dynamics you can convert to time by using \cref{eq:frametotime}. Although the \gls{acr:rmsd} of the backbone doesn't fully plateau, some fluctuations are expected as the protein is naturally going to vibrate within nature at 300 k. A \gls{acr:rmsd} of less than 1.5 is usually considered good for a simulation.
+
+    \begin{equation}
+        \begin{split}
+        Time ~(ps) &= Frames \times \Delta T \times ntwx \\
+        \Delta T &= 0.002 ~(ps)             \\
+        ntwx &= 100                      \\      
+        \end{split}
+        \label{eq:frametotime}
+    \end{equation}
+
+    \subsubsection{Visualising the trajectory}
+    \paragraph{}
+        One other piece of analysis that you should always perform is to visually inspect the trajectory. It is impossible to calculate the binding affinity of a molecule if it leaves the active site during the simulation and so visually checking that nothing strange is happening is an essential part of checking your data. If working on Linux, this is incredibly easy and can be done using VMD. You simply need to load the trajectory and parameter files in, like how you would visualise a restart coordinate file \cref{cmd:ncload}.
+
+    \begin{bashcmd}[label=cmd:ncload]{Visualising the trajectory in linux}
+        vmd prod.nc complex.parm7
+    \end{bashcmd}
+
+    \paragraph{}
+        If on windows however, you cannot load \enquote{.nc} files into vmd. You instead need to convert them to a \enquote{.binpos} file. To do this, you can again use cpptraj and \cref{inp:binpos} to obtain the new trajectory file. This can be then loaded into vmd like any other coordinate file. This should be run in the main \enquote{Dynamics} directory.
+
+    \begin{inpfile}[label=inp:binpos]{Convert .nc to .binpos}{cpptraj}
+        parm complex.parm7
+        trajin prod.nc
+
+        trajout prod.binpos
+    \end{inpfile}

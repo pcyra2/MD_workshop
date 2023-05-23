@@ -73,3 +73,34 @@
     sander -O -i equil.in -o equil.out -c heat.ncrst -p complex.parm7 -r equil.ncrst -inf equil.mdinfo -x equil.nc
     sander -O -i prod.in -o prod.out -c equil.ncrst -p complex.parm7 -r prod.ncrst -inf prod.mdinfo -x prod.nc
     \end{bashcmd}
+
+    \subsection{\cref{task:Analysis}: Analysis of the simulations}
+    \begin{bashcmd}[label=cmd:task6]{Runnning analysis}
+    mkdir analysis
+    cd analysis
+    mkdir min
+    cd min
+    process_minout.perl ../../min.out
+    cd ../
+    mkdir simulation
+    cd simulation
+    process_minout.perl ../../heat.out ../../equil.out ../../prod.out
+    tail -n 6000 summary.VOLUME > tmp
+    mv tmp summary.VOLUME
+    wget XXX
+    cpptraj cpptraj.in
+    cd ../../
+    wget XXX
+    cpptraj convert.in
+    \end{bashcmd}
+
+    \subsection{\cref{task:Energy}: Calculate the free energy of binding.}
+    \begin{bashcmd}[label=cmd:task7]{Calculating the free energy}
+    cd ../Free_Energy/
+    cp ../Dynamics/prod.nc .
+    cp ../Dynamics/complex.parm7 SOLVATED_COMPLEX.parm7
+    ante-MMPBSA.py -p SOLVATED_COMPLEX.parm7 -c complex.parm7 -r receptor.parm7 -l ligand.parm7 -s :WAT,Na+ -n :UNL --radii=mbondi2
+    wget XXX
+    mpirun -np 10 MMPBSA.py.MPI -O -i gbsa.in -o gb_results.dat -sp SOLVATED_COMPLEX.parm7 -cp complex.parm7 -rp receptor.parm7 -lp ligand.parm7
+    tail gb_results.dat
+    \end{bashcmd}

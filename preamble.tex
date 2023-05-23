@@ -29,7 +29,8 @@
 % Customise spacing between lines
 \usepackage{setspace}
 \onehalfspacing
-\setlength{\parindent}{1.5em}
+%\setlength{\parindent}{1.5em}
+\setlength{\parindent}{0pt}
 
 % Afterpage flushing of floats
 \usepackage{afterpage}
@@ -213,6 +214,8 @@
 
 % Set up tikzexternalize
 \usetikzlibrary{external}
+\tikzexternalize[prefix=tikz/]
+
 \tikzexternalize
 \newif\iftikzex
 \ifdefined\notikzex
