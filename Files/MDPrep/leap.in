@@ -1,32 +1,25 @@
-source leaprc.protein.ff14SB # Loads general protein parameters
-source leaprc.water.tip3p # Loads water parameters
-source leaprc.gaff # Loads "gaff" parameters
+source leaprc.protein.ff14SB 
+source leaprc.water.tip3p 
+source leaprc.gaff 
 
 LIG = loadmol2 pose_1_bcc_gaff.mol2
-# Loads the coordinates and charges for the ligand
-
 loadamberparams pose_1_AC.frcmod
-# Loads the new parameters for the ligand
-
 check LIG
-# Checks that all parameters are present for the ligand
 
-PROT = loadpdb "protein_AMBER.pdb"
-# Loads the protein structure
+MG = loadpdb "MG.pdb"
+check MG
 
+POP = loadmol2 POP_bcc_amber.mol2
+check POP
+
+PROT = loadpdb "protein.pdb"
 check PROT
-# Checks for missing parameters for your protein
 
-COMP = combine {PROT LIG}
-# Combines the protein and ligand
+COMP = combine {PROT MG POP LIG}
 
-solvateoct COMP TIP3PBOX 5.0
-# Adds an octahedral box of water automatically with a minimum distance of 5 A from the protein
+solvateoct COMP TIP3PBOX 10.0
 
-addions COMP Cl- 0
-# Neutralises the net charge of the system by adding counterions
+addions COMP Na+ 0
 
 saveamberparm COMP complex.parm7 start.rst7
-#Saves parameters and initial coordinates
-
 quit

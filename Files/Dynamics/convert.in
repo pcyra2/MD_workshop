@@ -1,0 +1,3 @@
+parm complex.parm7
+trajin prod.nc
+trajout prod.binpos

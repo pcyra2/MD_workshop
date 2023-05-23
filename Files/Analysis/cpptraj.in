@@ -1,0 +1,9 @@
+parm ../../complex.parm7
+
+trajin ../../heat.nc
+trajin ../../equil.nc
+trajin ../../prod.nc
+
+
+rmsd backbone_RMSD @C,CA,N out backbone_RMSD.dat 
+run

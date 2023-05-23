@@ -1,0 +1,10 @@
+GBSA input file
+&general
+startframe=1, endframe=5000, interval=20, 
+strip_mask=:WAT:Na+, 
+keep_files=0, 
+/
+&gb
+igb=2, 
+saltcon=0.100,
+/
