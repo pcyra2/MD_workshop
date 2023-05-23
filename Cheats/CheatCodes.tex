@@ -18,7 +18,7 @@
     \begin{bashcmd}[label=cmd:task2]{Linux commands to obtain the structures.}
     cd Structures
     wget https://files.rcsb.org/download/1N23.pdb
-    wget XXXX
+    wget https://raw.githubusercontent.com/pcyra2/MD_workshop/main/Files /Structures/LIG.mol2
     grep -v " B " 1N23.pdb > 1n23_monomer.pdb
     grep "2BN" 1n23_monomer.pdb > 2BN.pdb
     grep -v "2BN" 1n23_monomer.pdb > 1n23_monomer_NoLig.pdb  
@@ -55,7 +55,7 @@
     grep "MG" 1n23_monomer_NoLig.pdb > MG.pdb
     acpype -i POP.pdb -c bcc -n -4 -a amber
     cp POP.acpype/POP_bcc_amber.mol2 .
-    wget XXXX
+    wget https://raw.githubusercontent.com/pcyra2/MD_workshop/main/Files /MDPrep/leap.in
     pdb4amber -i 1n23_monomer_NoLig.pdb -o protein.pdb -s :MG,POP
     conda activate AmberTools
     tleap -f leap.in
@@ -66,7 +66,10 @@
     cp start.rst7 ../
     cp complex.parm7 ../
     cd ../
-    wget XXXX
+    wget https://raw.githubusercontent.com/pcyra2/MD_workshop/main/Files /Dynamics/min.in
+    wget https://raw.githubusercontent.com/pcyra2/MD_workshop/main/Files /Dynamics/heat.in
+    wget https://raw.githubusercontent.com/pcyra2/MD_workshop/main/Files /Dynamics/equil.in
+    wget https://raw.githubusercontent.com/pcyra2/MD_workshop/main/Files /Dynamics/prod.in
     sander -O -i min.in -o min.out -c start.rst7 -p complex.parm7 -r min.ncrst -inf min.mdinfo
     sander -O -i heat.in -o heat.out -c min.ncrst -p complex.parm7 -r heat.ncrst -inf heat.mdinfo -x heat.nc
     sander -O -i equil.in -o equil.out -c heat.ncrst -p complex.parm7 -r equil.ncrst -inf equil.mdinfo -x equil.nc
@@ -86,10 +89,10 @@
     process_minout.perl ../../heat.out ../../equil.out ../../prod.out
     tail -n 6000 summary.VOLUME > tmp
     mv tmp summary.VOLUME
-    wget XXX
+    wget  https://raw.githubusercontent.com/pcyra2/MD_workshop/main/Files /Analysis/cpptraj.in
     cpptraj cpptraj.in
     cd ../../
-    wget XXX
+    wget https://raw.githubusercontent.com/pcyra2/MD_workshop/main/Files /Dynamics/convert.in
     cpptraj convert.in
     \end{bashcmd}
 
@@ -99,7 +102,7 @@
     cp ../Dynamics/prod.nc .
     cp ../Dynamics/complex.parm7 SOLVATED_COMPLEX.parm7
     ante-MMPBSA.py -p SOLVATED_COMPLEX.parm7 -c complex.parm7 -r receptor.parm7 -l ligand.parm7 -s :WAT,Na+ -n :UNL --radii=mbondi2
-    wget XXX
+    wget https://raw.githubusercontent.com/pcyra2/MD_workshop/main/Files /Energy/gbsa.in
     mpirun -np 10 MMPBSA.py.MPI -O -i gbsa.in -o gb_results.dat -sp SOLVATED_COMPLEX.parm7 -cp complex.parm7 -rp receptor.parm7 -lp ligand.parm7
     tail gb_results.dat
     \end{bashcmd}
