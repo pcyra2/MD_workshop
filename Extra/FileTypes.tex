@@ -1,0 +1,39 @@
+\section{File types and jargon}
+    There are many different files that are required to run a molecular dynamics simulation. Although many of the files can be used interchangeably, some file types contain extra information which can be useful in specific use cases. 
+
+\subsection{File types}
+    \subsubsection{Structure}
+    \paragraph{}
+        The first group of file types that are crucial, not only to molecular dynamics but to all of computational chemistry are coordinate or structure files. The most common version of these are \enquote{.xyz} files which contain the elemental information as well as the 3D spatial coordinates. A simple coordinate file must contain the 3D spatial coordinates of all particles in the system. There are many other pieces of information that can be entered into a structure file such as atomic elements, atom types, chemical charges and bonding information. Open Babel is a tool that has the ability to convert between many different structure file formats and can be incredibly useful when working with a variety of different structure files.
+
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{@{}cll@{}}
+            \toprule
+           \multicolumn{1}{l}{\textbf{Extension}}  &  \textbf{Extra Information} & \textbf{Human Readable} \\ \midrule
+           .xyz & Elements, Number of atoms & Yes \\
+           .pdb & Elements, Residue names, Atom types, Protein information  & Yes \\
+           .mol2 & Atom types, Bonds, Charges, Molecule name & Yes \\
+           .rst7 & Number of atoms, Periodic cell vectors & Yes \\
+           .ncrst & Number of atoms, Velocities, Periodic cell vectors & No \\
+           \bottomrule
+        \end{tabular}
+        \caption{A non-exhaustive list of structural file types that are used within the molecular dynamics workflow.}
+        \label{tab:structFiles}
+    \end{table}
+
+    \subsubsection{Parameter files}
+    \paragraph{}
+        Although structure files often contain enough information in order to visualise or run simple calculations on the systems, when a large number of atoms or molecules are included in the system it is often sensible to split these into two files. This is where parameter files become useful as they contain a list of extra information about the particles in the system. This is also useful for dynamical systems where the parameters of the particles do not change but the positional information does. Parameter files are mainly used within molecular dynamics simulations for this reason and it is important to note that they can also be known as topology files within other simulation packages. The parameter file format that we will be using within the workshop is the \enquote{.parm7} file type from Amber.
+
+    \subsubsection{Trajectory files}
+    \paragraph{}
+        Trajectory files in their simplest form are a combination of structure files that allow you to follow the movement of particles within a simulation. As they can contain many different sets of coordinates for a single system, these files can often become large and so they usually contain only the spatial information of the system and so require a parameter file to be understood. There are two types of trajectory files that we will see throughout the workshop; \enquote{.nc} and \enquote{.binpos}. Both of these files are in binary format in order to reduce the file size and the main reason for using \enquote{.binpos} files are that \enquote{.nc} files cannot be opened in the Windows version of \texttt{VMD}.
+
+    \subsubsection{Input files}
+    \paragraph{}
+        Due to the functionality of most scientific software, it is often useful to create input files that tell the software what type of calculation you are planning to undertake. These are usually plain text files that have specific keywords that are understood by the software. 
+
+    \subsubsection{Data files}
+    \paragraph{}
+        When running molecular dynamics, you can quickly become overwhelmed by the ammont of data that can be outputted. It is therefore often useful to extract specific data into \enquote{.dat} files which are usually tabular files that contain plottable data for a specific property. The \enquote{.dat} file extension is not exclusive to this usage however and not all of these can be quickly plotted so it is often useful to check what data is conained within such files. 

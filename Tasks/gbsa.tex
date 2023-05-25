@@ -2,15 +2,15 @@
     \begin{task}[label=task:Energy]{Calculating the free energy of binding.}
         \begin{enumerate}[label=(\alph*)]
             \item Extract the receptor, ligand and complex parameter files
-            \item Perform a gbsa calculation
+            \item Perform a \gls{acr:gbsa} calculation
         \end{enumerate}
     \end{task}
 
     \paragraph{}
-    There are many different ways of calculating the Gibbs free energy of binding for a ligand into a protein\cite{Cournia2017RelativeConsiderations, Genheden2012ComparisonEnergies, Singh2010AbsoluteInteractions, P.Bhati2016RapidIntegration, Wang2019End-PointDesign}, however the simplest and cheapest way is to use either the \gls{acr:gbsa} or \gls{acr:pbsa} method.\cite{Wang2019End-PointDesign} The scientific theory behind these methods can be found in \cref{subsection:pbsa-theory}.
+    There are many different ways of calculating the Gibbs free energy of binding for a ligand into a protein\cite{Cournia2017RelativeConsiderations, Genheden2012ComparisonEnergies, Singh2010AbsoluteInteractions, P.Bhati2016RapidIntegration, Wang2019End-PointDesign}, however, the simplest and quickest way is to use either the \gls{acr:gbsa} or \gls{acr:pbsa} method.\cite{Wang2019End-PointDesign} The scientific theory behind these methods can be found in \cref{subsection:pbsa-theory}.
 
     \paragraph{}
-    There are two ways to run a \gls{acr:gbsa}  or \gls{acr:pbsa} calculation. There are two ways of performing these types of calculations, as you can either 3 independent simulations of the ligand, protein and complex in order to calculate the $\Delta G$\textsubscript{Solv, Lig.}, $\Delta G$\textsubscript{Solv, Rec.} and $\Delta G$\textsubscript{Solv, Complex} directly, and the $\Delta G$\textsubscript{Vaccum, Bind.} is calculated as the interactions between the ligand and protein from the complex simulation. The other way of performing this calculation however, is to perform a single simulation of the complexed system. It is then possible to separate each of the energies out post-hoc. Advantages of this method are that it only requires a single simulation, meaning it is much less computationally intensive so you can potentially run a longer simulation. This type of calculation also has been shown to increase accuracy. Due to the ease and accuracy of the single simulation method, we are going to use this for calculating the binding energy of the ligand. 
+    There are two different ways of performing these types of calculations. The first method is to run independent simulations of the ligand, protein and complex in order to calculate the $\Delta G$\textsubscript{Solv, Lig.}, $\Delta G$\textsubscript{Solv, Rec.} and $\Delta G$\textsubscript{Solv, Complex} directly, and then calculate $\Delta G$\textsubscript{Vaccum, Bind.} from the interactions between the ligand and protein in the complex simulation. The other way of performing this calculation is to perform a single simulation of the complexed system. It is then possible to separate each of the energies out post-hoc. The advantages of this method are that it only requires a single simulation, meaning it is much less computationally intensive so you can potentially run a longer simulation. This type of calculation also has been shown to increase accuracy. Due to the ease and accuracy of the single simulation method, we are going to use this for calculating the binding energy of the ligand. 
 
     \subsubsection{Setup}
     \paragraph{}
@@ -46,7 +46,7 @@
 GBSA input file
 &general
     startframe=1, endframe=5000, interval=20, \\ This allows you to speed up the calculation by only calculating every n bins.
-    strip_mask=:WAT:Na+, \\ The AMBER mask for the solvent and counter ions stripped in the previous step.
+    strip_mask=:WAT:Na+, \\ The AMBER mask for the solvent and counter ions that were stripped in the previous step.
     keep_files=0, \\ Delete temporary files after the calculation completes.
 /
 &gb

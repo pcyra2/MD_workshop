@@ -7,7 +7,7 @@
     \end{task}
 
     \paragraph{}
-        To run a \gls{acr:md} simulation of a ligand-protein complex, you first need a good start structure for the ligand docked into the protein. luckily many protein structures are obtained with a ligand already docked into the active site and so these positions can be used as a start point for docking our own ligands. We shall be using gnina as it can take the \enquote{2BN.pdb} structure generated previously as an initial guess for the active site location.
+        To run a \gls{acr:md} simulation of a ligand-protein complex, you first need a good start structure for the ligand docked into the protein. Luckily many protein structures are obtained with a ligand already docked into the active site and so these positions can be used as a starting point for docking our ligands. We shall be using gnina as it can take the \enquote{2BN.pdb} structure generated previously as an initial guess for the active site location.
 
     \begin{bashcmd}[label=cmd:gnina]{Basic input for gnina without GPU acceloration}
         gnina -r 1n23_monomer_NoLig.pdb -l LIG.mol2 --autobox_ligand 2BN.pdb  -o docked.mol2 --no_gpu 
@@ -21,9 +21,9 @@
     \textendash r                                           & Receptor/Protein pdb file                 & Input     \\
     \textendash l                                           & Ligand file to be docked                  & Input     \\
     \textendash \textendash autobox\textunderscore ligand   & Stripped receptor/protein parameter file  & Input     \\
-    \textendash o                                           & Output pdb file for docked poses          & Output    \\
+    \textendash o                                           & Output PDB file for docked poses          & Output    \\
     \textendash \textendash no\textunderscore gpu           & Switches off GPU acceleration             & Variable  \\
-                                                            & (Not neccessary if compiled correctly)    &           \\
+                                                            & (Not necessary if compiled correctly)    &           \\
     \bottomrule
     \end{tabular}
     \label{Tab:gninaVar}
@@ -31,7 +31,7 @@
     \end{table}
 
     \paragraph{}
-    The docked poses of the ligand can then be viewed using \texttt{VMD} like when viewing the original complexed structure. You will however need to load in two files rather than one. It is easiest if you load your \enquote{1n23\textunderscore monomer\textunderscore NoLig.pdb} file first, then opening the \enquote{docked.mol2} once \texttt{VMD} has loaded (Figures \ref{fig:NewMol} and \ref{fig:LoadMol}). This will set the docked structures as \enquote{on top} meaning you can cycle through the different docked \enquote{Frames}. You should set your representation for your protein as \enquote{New Cartoon} (Figure \ref{fig:protRep}) and the representation for your docked ligand as \enquote{CPK} (Figure \ref{fig:dockRep}). 
+    The docked poses of the ligand can then be viewed using \texttt{VMD}, like when viewing the original complexed structure. You will however need to load in two files rather than one. It is easiest if you load your \enquote{1n23\textunderscore monomer\textunderscore NoLig.pdb} file first, then open the \enquote{docked.mol2} file once \texttt{VMD} has loaded (Figures \ref{fig:NewMol} and \ref{fig:LoadMol}). This will set the docked structures as \enquote{on top} meaning you can cycle through the different docked \enquote{Frames}. You should set your representation for your protein as \enquote{New Cartoon} (Figure \ref{fig:protRep}) and the representation for your docked ligand as \enquote{CPK} (Figure \ref{fig:dockRep}). 
         
     \begin{figure}[H]
         \centering
@@ -54,7 +54,7 @@
         \begin{minipage}{0.45\textwidth}
             \centering
             \includegraphics[height=0.5\textheight]{Graphics/ScreenShots/protein.png}
-            \captionof{figure}{The representation for the protein}
+            \captionof{figure}{The representation for the protein.}
             \label{fig:protRep}
         \end{minipage}%
         \begin{minipage}{0.45\textwidth}
@@ -68,7 +68,7 @@
     \paragraph{}
         Finally, to use the docked pose for the molecular dynamics simulation you must extract the initial pose from the output coordinate file. You can either do this through the \gls{acr:gui} in VMD, or through the \gls{acr:cli}. It is recommended to use the \gls{acr:cli} as this is the fastest method and ensures that no structural manipulation takes place. To do this you copy the \enquote{docked.mol2} file to \enquote{pose\textunderscore 1.mol2}, then open in either vim or nano. From there you can simply delete the other docked poses from the file. (All the lines from the second \enquote{@<TRIPOS>MOLECULE}). The final docked file should look something similar to File \ref{out:mol2}.
 
-    \begin{bashoutput}[label=out:mol2]{Docked pose output file}
+    \begin{bashoutput}[label=out:mol2]{Docked pose output file.}
 @<TRIPOS>MOLECULE
 LIG.xyz
  10 9 0 0 0
@@ -99,14 +99,14 @@ GASTEIGER
     \end{bashoutput}
 
     \paragraph{}
-        You will notice that this docking procedure has removed the protons from our ligand so we shall have to manually add this back in. As our ligand is a carbocation, this process is more complicated than normal as automating the protonation of the molecule will also neutralise it. One way to fix this is to protonate the ligand to the neutral molecule, then manually remove the proton using a text editor. As \enquote{mol2} files contain bonding information, it is best to do this with a \enquote{.xyz} molecule file however.
+        You will notice that this docking procedure has removed the protons from our ligand so we shall have to manually add them back in. As our ligand is a carbocation, this process is more complicated than normal as automating the protonation of the molecule will also neutralise it. One way to fix this is to protonate the ligand to the neutral molecule, then manually remove the proton using a text editor. As \enquote{mol2} files contain bonding information, it is best to do this with a \enquote{.xyz} molecule file however.
 
-    \begin{bashcmd}[label=cmd:addH]{Add hydrogen atoms and convert to .xyz}
+    \begin{bashcmd}[label=cmd:addH]{Add hydrogen atoms and convert to .xyz.}
         obabel -imol2 pose_1.mol2 -oxyz -Opose_1.xyz -h   
         #This protonates and converts to xyz in one step.
     \end{bashcmd}
 
-    \begin{bashoutput}[label=out:xyz]{Protonated neutral ligand}
+    \begin{bashoutput}[label=out:xyz]{Protonated neutral ligand.}
 28
 LIG.xyz
 C         42.71600       46.45330       46.01350
@@ -141,15 +141,15 @@ H         42.39066       43.64721       48.72201
     \end{bashoutput}
 
     \paragraph{}
-        When visualising the file, you will see that there is a proton on the carbocation. Selecting this atom shows us that it is atom index 12 and as \texttt{vmd} is \enquote{zero indexed}, it is the 13\textsuperscript{th} atom which needs removing. Delete this line in the \enquote{pose\textunderscore 1.xyz} file, and change the number at the top from 28 to 27 as this is the number of atoms in the molecule. Finally we will convert back to \enquote{mol2} using obabel and \cref{cmd:xyzmol2}.
+        When visualising the file, you will see that there is a proton on the carbocation. Selecting this atom shows us that it is atom index 12 and as \texttt{vmd} is \enquote{zero indexed}, it is the 13\textsuperscript{th} atom which needs removing. Delete this line in the \enquote{pose\textunderscore 1.xyz} file, and change the number at the top from 28 to 27 as this is the number of atoms in the molecule. Finally, we will convert back to \enquote{mol2} using obabel and \cref{cmd:xyzmol2}.
 
-    \begin{bashcmd}[label=cmd:xyzmol2]{Convert back to mol2}
+    \begin{bashcmd}[label=cmd:xyzmol2]{Convert back to mol2.}
         obabel -ixyz pose_1.xyz -omol2 -Opose_1.mol2
     \end{bashcmd}
 
 
     \paragraph{}
-        Finally you need to check that the hybridisation states for all of the carbons is correct. There should be 5 \enquote{C.2} carbons as there are 2 double bonds and 1 cationic carbon atom. It is likely that obabel incorrectly identified the carbocation as \enquote{C.2} and so you should manually change this in your file (the carbocation should be carbon 2). The final file should look something like \cref{out:finaldocked} however we have excluded the bonding information for simplicity.
+        Finally, you need to check that the hybridisation states for all of the carbons are correct. There should be 5 \enquote{C.2} carbons as there are 2 double bonds and 1 cationic carbon atom. It is likely that obabel incorrectly identified the carbocation as \enquote{C.2} and so you should manually change this in your file (the carbocation should be carbon 2). The final file should look something like \cref{out:finaldocked} however we have excluded the bonding information for simplicity.
 
     \begin{bashoutput}[label=out:finaldocked]{The final structure for the docked molecule.}
 @<TRIPOS>MOLECULE

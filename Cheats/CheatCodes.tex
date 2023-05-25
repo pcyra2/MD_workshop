@@ -1,8 +1,8 @@
 \newpage
-\section{Cheat codes}
+\section{Cheat codes}\label{sec:Cheats}
     \paragraph{}
-    If you have any problems with any of the tasks within this workshop, here is a list of commands which should help you to complete the task. We recommend using this as a last resort however,
-    as simply compying and pasting commands doesnt allow you to learn the methodology. 
+    If you have any problems with any of the tasks within this workshop, here is a list of commands which should help you to complete the task. We recommend using this as a last resort, however,
+    as simply copying and pasting commands doesn't allow you to learn the methodology. 
 
     \subsection{\cref{task:setup}: Initiating the file system}
     \begin{bashcmd}[label=cmd:task1]{Linux commands to initiate your local file structure.}
@@ -27,7 +27,7 @@
     \end{bashcmd}
 
     \subsection{\cref{task:Docking}: Docking the ligand}
-    \begin{bashcmd}[label=cmd:task3]{How to dock the ligand into the protein}
+    \begin{bashcmd}[label=cmd:task3]{How to dock the ligand into the protein.}
     cd ../Docking
     cp ../Structures/1n23_monomer_NoLig.pdb .
     cp ../Structures/2BN.pdb .
@@ -41,7 +41,7 @@
     \end{bashcmd}
 
     \subsection{\cref{task:Prep}: Setting up a dynamics simulation}
-    \begin{bashcmd}[label=cmd:task4]{How to set up your simulations}
+    \begin{bashcmd}[label=cmd:task4]{How to set up your simulations.}
     cd ../Dynamics
     mkdir setup
     cd setup
@@ -62,7 +62,7 @@
     \end{bashcmd}
 
     \subsection{\cref{task:Dynamics}: Running a dynamics simulations}
-    \begin{bashcmd}[label=cmd:task5]{Running the simulations}
+    \begin{bashcmd}[label=cmd:task5]{Running the simulations.}
     cp start.rst7 ../
     cp complex.parm7 ../
     cd ../
@@ -77,7 +77,7 @@
     \end{bashcmd}
 
     \subsection{\cref{task:Analysis}: Analysis of the simulations}
-    \begin{bashcmd}[label=cmd:task6]{Runnning analysis}
+    \begin{bashcmd}[label=cmd:task6]{Runnning analysis.}
     mkdir analysis
     cd analysis
     mkdir min
@@ -97,7 +97,7 @@
     \end{bashcmd}
 
     \subsection{\cref{task:Energy}: Calculate the free energy of binding.}
-    \begin{bashcmd}[label=cmd:task7]{Calculating the free energy}
+    \begin{bashcmd}[label=cmd:task7]{Calculating the free energy.}
     cd ../Free_Energy/
     cp ../Dynamics/prod.nc .
     cp ../Dynamics/complex.parm7 SOLVATED_COMPLEX.parm7
