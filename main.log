@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.10.0 (TeX Live 2019/Debian)  (format=lualatex 2022.11.10)  30 MAY 2023 18:16
+This is LuaTeX, Version 1.10.0 (TeX Live 2019/Debian)  (format=lualatex 2022.11.10)  30 MAY 2023 18:33
  system commands enabled.
 **main.tex
 (./main.tex
@@ -1437,12 +1437,12 @@ Package polyglossia Info: Option: English, variant=american.
 )
 Package polyglossia Info: Option: english variant=british.
 Module polyglossia Info: Language data for ukenglish
-(polyglossia)            hyphenation	hyph-en-gb.hyp.txt
-(polyglossia)            patterns	hyph-en-gb.pat.txt
 (polyglossia)            righthyphenmin	3
-(polyglossia)            lefthyphenmin	2
 (polyglossia)            synonyms	british,UKenglish
-(polyglossia)            loader	loadhyph-en-gb.tex on input line 185
+(polyglossia)            loader	loadhyph-en-gb.tex
+(polyglossia)            hyphenation	hyph-en-gb.hyp.txt
+(polyglossia)            lefthyphenmin	2
+(polyglossia)            patterns	hyph-en-gb.pat.txt on input line 185
 Module polyglossia Info: Language ukenglish was not yet loaded; created with id 
 2 on input line 185
 Package polyglossia Info: Option: english variant=british.
@@ -3328,10 +3328,16 @@ LaTeX Info: Redefining \ttfamily on input line 2.
 luaotfload | aux : font no 37 (nil) defines no feature for script latn with lang
 uage eng
 Package cleveref Info: loaded `english' language definitions on input line 2.
+LaTeX Info: Redefining \rmfamily on input line 46.
+LaTeX Info: Redefining \sffamily on input line 46.
+LaTeX Info: Redefining \ttfamily on input line 46.
 )
 \tf@toc=\write14
 
 \openout14 = main.toc
+
+Overfull \vbox (16.84981pt too high) has occurred while \output is active []
+
 LaTeX Font Info:    Font shape `TU/Alegreya(0)/m/sl' in size <10.95> not availab
 le
 (Font)              Font shape `TU/Alegreya(0)/m/it' tried instead on input line
@@ -3340,7 +3346,8 @@ LaTeX Font Info:    Font shape `TU/Alegreya(1)/m/sl' in size <10.95> not availab
 le
 (Font)              Font shape `TU/Alegreya(1)/m/it' tried instead on input line
  47.
- [1
+
+[1
 
 
 \openout5 = main.ist
@@ -3449,14 +3456,14 @@ Overfull \hbox (21.90002pt too wide) detected at line 4
  []
 
 ))) (./Theory/Theory.tex [3] (./Theory/MD.tex [4]
-<Graphics/Theory/QMMM.png, id=200, 2569.6pt x 1374.13374pt>
+<Graphics/Theory/QMMM.png, id=203, 2569.6pt x 1374.13374pt>
 File: Graphics/Theory/QMMM.png Graphic file (type png)
 <use Graphics/Theory/QMMM.png>
 Package luatex.def Info: Graphics/Theory/QMMM.png  used on input line 19.
 (luatex.def)             Requested size: 418.25555pt x 223.66101pt.
 ) [5<./Graphics/Theory/QMMM.png>] (./Theory/Docking.tex [6]) (./Theory/mmpbgbsa
 .tex
-<Graphics/Theory/gbsa.pdf, id=242, 2569.6pt x 1445.4pt>
+<Graphics/Theory/gbsa.pdf, id=245, 2569.6pt x 1445.4pt>
 File: Graphics/Theory/gbsa.pdf Graphic file (type pdf)
 <use Graphics/Theory/gbsa.pdf>
 Package luatex.def Info: Graphics/Theory/gbsa.pdf  used on input line 10.
@@ -3472,7 +3479,7 @@ Package epstopdf Info: Source file: <Graphics/1n20Lig.eps>
 ed-to.pdf Graphics/1n20Lig.eps>
 (epstopdf)             \includegraphics on input line 23.
 Package epstopdf Info: Output file is already uptodate.
-<Graphics/1n20Lig-eps-converted-to.pdf, id=299, 371.3875pt x 106.3975pt>
+<Graphics/1n20Lig-eps-converted-to.pdf, id=302, 371.3875pt x 106.3975pt>
 File: Graphics/1n20Lig-eps-converted-to.pdf Graphic file (type pdf)
 <use Graphics/1n20Lig-eps-converted-to.pdf>
 Package luatex.def Info: Graphics/1n20Lig-eps-converted-to.pdf  used on input li
@@ -3509,45 +3516,45 @@ Overfull \hbox (21.90002pt too wide) detected at line 2
  []
 
 )
-<Graphics/ScreenShots/Representations.png, id=424, 471.7625pt x 227.85126pt>
+<Graphics/ScreenShots/Representations.png, id=427, 471.7625pt x 227.85126pt>
 File: Graphics/ScreenShots/Representations.png Graphic file (type png)
 <use Graphics/ScreenShots/Representations.png>
 Package luatex.def Info: Graphics/ScreenShots/Representations.png  used on input
  line 54.
 (luatex.def)             Requested size: 292.7776pt x 141.40538pt.
-<Graphics/ScreenShots/NewCartoonpng.png, id=425, 409.53pt x 1042.89626pt>
+<Graphics/ScreenShots/NewCartoonpng.png, id=428, 357.335pt x 949.5475pt>
 File: Graphics/ScreenShots/NewCartoonpng.png Graphic file (type png)
 <use Graphics/ScreenShots/NewCartoonpng.png>
 Package luatex.def Info: Graphics/ScreenShots/NewCartoonpng.png  used on input l
 ine 61.
-(luatex.def)             Requested size: 152.66727pt x 388.77357pt.
+(luatex.def)             Requested size: 146.3011pt x 388.77357pt.
  [16<./Graphics/ScreenShots/Representations.png>]
-<Graphics/ScreenShots/NewRep.png, id=439, 316.18124pt x 689.57625pt>
+<Graphics/ScreenShots/NewRep.png, id=442, 337.26pt x 689.57625pt>
 File: Graphics/ScreenShots/NewRep.png Graphic file (type png)
 <use Graphics/ScreenShots/NewRep.png>
 Package luatex.def Info: Graphics/ScreenShots/NewRep.png  used on input line 73.
 
-(luatex.def)             Requested size: 101.86032pt x 222.1539pt.
-<Graphics/ScreenShots/SelectedAtoms.png, id=440, 316.18124pt x 689.57625pt>
+(luatex.def)             Requested size: 108.651pt x 222.1539pt.
+<Graphics/ScreenShots/SelectedAtoms.png, id=443, 337.26pt x 689.57625pt>
 File: Graphics/ScreenShots/SelectedAtoms.png Graphic file (type png)
 <use Graphics/ScreenShots/SelectedAtoms.png>
 Package luatex.def Info: Graphics/ScreenShots/SelectedAtoms.png  used on input l
 ine 79.
-(luatex.def)             Requested size: 101.86032pt x 222.1539pt.
+(luatex.def)             Requested size: 108.651pt x 222.1539pt.
  [17<./Graphics/ScreenShots/NewCartoonpng.png>]
-<Graphics/ScreenShots/CPK.png, id=448, 316.18124pt x 689.57625pt>
+<Graphics/ScreenShots/CPK.png, id=451, 337.26pt x 689.57625pt>
 File: Graphics/ScreenShots/CPK.png Graphic file (type png)
 <use Graphics/ScreenShots/CPK.png>
 Package luatex.def Info: Graphics/ScreenShots/CPK.png  used on input line 87.
-(luatex.def)             Requested size: 101.86032pt x 222.1539pt.
+(luatex.def)             Requested size: 108.651pt x 222.1539pt.
  [18<./Graphics/ScreenShots/NewRep.png><./Graphics/ScreenShots/SelectedAtoms.png
 >]
-<Graphics/ScreenShots/CartoonRender.png, id=456, 1854.93pt x 1019.81pt>
+<Graphics/ScreenShots/CartoonRender.png, id=459, 1854.93pt x 1056.94875pt>
 File: Graphics/ScreenShots/CartoonRender.png Graphic file (type png)
 <use Graphics/ScreenShots/CartoonRender.png>
 Package luatex.def Info: Graphics/ScreenShots/CartoonRender.png  used on input l
 ine 94.
-(luatex.def)             Requested size: 376.42744pt x 206.9461pt.
+(luatex.def)             Requested size: 376.42744pt x 214.48253pt.
  [19<./Graphics/ScreenShots/CPK.png><./Graphics/ScreenShots/CartoonRender.png>]
 
 \openout9 = main.listing
@@ -3599,25 +3606,25 @@ Overfull \hbox (21.90002pt too wide) detected at line 2
  []
 
 ) [21]
-<Graphics/ScreenShots/NewMol.png, id=490, 471.7625pt x 305.14pt>
+<Graphics/ScreenShots/NewMol.png, id=493, 471.7625pt x 305.14pt>
 File: Graphics/ScreenShots/NewMol.png Graphic file (type png)
 <use Graphics/ScreenShots/NewMol.png>
 Package luatex.def Info: Graphics/ScreenShots/NewMol.png  used on input line 40.
 
 (luatex.def)             Requested size: 169.39119pt x 109.56628pt.
-<Graphics/ScreenShots/docked_file.png, id=491, 451.6875pt x 288.07625pt>
+<Graphics/ScreenShots/docked_file.png, id=494, 451.6875pt x 288.07625pt>
 File: Graphics/ScreenShots/docked_file.png Graphic file (type png)
 <use Graphics/ScreenShots/docked_file.png>
 Package luatex.def Info: Graphics/ScreenShots/docked_file.png  used on input lin
 e 46.
 (luatex.def)             Requested size: 169.39119pt x 108.03711pt.
-<Graphics/ScreenShots/protein.png, id=492, 316.18124pt x 689.57625pt>
+<Graphics/ScreenShots/protein.png, id=495, 316.18124pt x 689.57625pt>
 File: Graphics/ScreenShots/protein.png Graphic file (type png)
 <use Graphics/ScreenShots/protein.png>
 Package luatex.def Info: Graphics/ScreenShots/protein.png  used on input line 56
 .
 (luatex.def)             Requested size: 127.32901pt x 277.69662pt.
-<Graphics/ScreenShots/docked.png, id=493, 316.18124pt x 689.57625pt>
+<Graphics/ScreenShots/docked.png, id=496, 316.18124pt x 689.57625pt>
 File: Graphics/ScreenShots/docked.png Graphic file (type png)
 <use Graphics/ScreenShots/docked.png>
 Package luatex.def Info: Graphics/ScreenShots/docked.png  used on input line 62.
@@ -4422,12 +4429,12 @@ Overfull \hbox (21.90002pt too wide) detected at line 8
 
 )) [57] [58]
 Module polyglossia Info: Language data for british
-(polyglossia)            hyphenation	hyph-en-gb.hyp.txt
-(polyglossia)            patterns	hyph-en-gb.pat.txt
 (polyglossia)            righthyphenmin	3
-(polyglossia)            lefthyphenmin	2
 (polyglossia)            synonyms	british,UKenglish
-(polyglossia)            loader	loadhyph-en-gb.tex on input line 59
+(polyglossia)            loader	loadhyph-en-gb.tex
+(polyglossia)            hyphenation	hyph-en-gb.hyp.txt
+(polyglossia)            lefthyphenmin	2
+(polyglossia)            patterns	hyph-en-gb.pat.txt on input line 59
 Module polyglossia Info: Language british was not yet loaded; created with id 4 
 on input line 59
 Module polyglossia Info: Language british already loaded; id is 4 on input line 
@@ -4575,29 +4582,29 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
 Here is how much of LuaTeX's memory you used:
  86583 strings out of 481365
- 1819308,8504848 words of node,token memory allocated
+ 1819194,8504848 words of node,token memory allocated
  1776 words of node memory still in use:
    31 hlist, 2 vlist, 14 rule, 5 glue, 4 kern, 1 glyph, 111 attribute, 98 glue_s
 pec, 111 attribute_list, 3 write, 24 pdf_literal, 19 pdf_action, 24 pdf_colorsta
 ck nodes
-   avail lists: 1:16,2:381767,3:162934,4:474,5:229,6:125,7:29026,8:131,9:776,10:
+   avail lists: 1:19,2:381767,3:162934,4:562,5:269,6:142,7:29026,8:145,9:900,10:
 18,11:248
  99291 multiletter control sequences out of 65536+600000
- 146 fonts using 46954139 bytes
+ 146 fonts using 46953907 bytes
  79i,20n,129p,10115b,2933s stack positions out of 5000i,500n,10000p,463605b,100000s
-</usr/share/texmf/fonts/opentype/public/lm/lmsans10-bold.otf></usr/share/fonts/t
-ruetype/ubuntu/UbuntuMono-B.ttf></usr/share/texlive/texmf-dist/fonts/opentype/pu
-blic/stix2-otf/STIX2Math.otf></usr/share/fonts/truetype/ubuntu/UbuntuMono-RI.ttf
-></usr/share/texlive/texmf-dist/fonts/opentype/public/stix2-otf/STIX2Math.otf></
-usr/share/fonts/truetype/ubuntu/UbuntuMono-R.ttf></usr/share/texlive/texmf-dist/
-fonts/opentype/huerta/alegreya/Alegreya-Bold.otf></usr/share/texlive/texmf-dist/
+</usr/share/fonts/truetype/ubuntu/UbuntuMono-B.ttf></usr/share/texlive/texmf-dis
+t/fonts/opentype/public/stix2-otf/STIX2Math.otf></usr/share/fonts/truetype/ubunt
+u/UbuntuMono-RI.ttf></usr/share/texlive/texmf-dist/fonts/opentype/public/stix2-o
+tf/STIX2Math.otf></usr/share/fonts/truetype/ubuntu/UbuntuMono-R.ttf></usr/share/
+texlive/texmf-dist/fonts/opentype/huerta/alegreya/Alegreya-Bold.otf></usr/share/
+texmf/fonts/opentype/public/lm/lmsans10-bold.otf></usr/share/texlive/texmf-dist/
 fonts/opentype/huerta/alegreya/Alegreya-Italic.otf></usr/share/texlive/texmf-dis
 t/fonts/opentype/huerta/alegreya/Alegreya-Regular.otf></usr/share/texlive/texmf-
 dist/fonts/opentype/huerta/alegreya/AlegreyaSC-Bold.otf>
-Output written on main.pdf (61 pages, 4002677 bytes).
+Output written on main.pdf (61 pages, 4422638 bytes).
 
-PDF statistics: 1088 PDF objects out of 1200 (max. 8388607)
- 934 compressed objects within 10 object streams
+PDF statistics: 1089 PDF objects out of 1200 (max. 8388607)
+ 935 compressed objects within 10 object streams
  327 named destinations out of 1000 (max. 131072)
  504 words of extra memory for PDF output out of 10000 (max. 100000000)
 
