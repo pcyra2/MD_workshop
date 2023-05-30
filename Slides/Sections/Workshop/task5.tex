@@ -1,0 +1,152 @@
+\subsection{Analysis}
+\begin{frame}{Analysis}
+We need to perform analysis to ensure our simulations have run correctly.\vspace{1cm}
+
+You should always check:
+\begin{itemize}
+	\item Has the energy converged during minimisation?
+	\item Is the temperature correct?
+	\item Is the volume constant during NVT ensembles?
+	\item Is the energy stable during simulations?
+	\item Is the protein stable during simulations?
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Minimisation Check}
+\begin{figure}
+\centering
+		\begin{tikzpicture}
+        	\begin{axis}[
+        	title={Minimisation Energies},
+        	xlabel={Step},
+        	ylabel={Energy (kcal mol$^{-1}$)},
+        	width=0.70\textwidth,
+        	height=0.7\textheight,
+        	legend pos=outer north east,
+        	align=center,
+            xtick = {0, 2000, 4000, 6000, 8000, 10000},
+            ytick = {-60000, -100000, -140000, -180000, -220000},
+            y tick label style={/pgf/number format/.cd,%
+            scaled y ticks = false,
+            set thousands separator={},
+            fixed,},
+            x tick label style={/pgf/number format/.cd,%
+            scaled x ticks = false,
+            set thousands separator={},
+            fixed,},
+	        ymin=-220000,
+        	ymax=-60000,
+        	xmin=0, xmax=10000,
+        	]
+        	\addplot+[color=NottinghamBlue, mark=x, smooth] plot table [] {../Data/summary.ENERGY};
+            \end{axis}
+       	\end{tikzpicture}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Temperature Check}
+\begin{figure}
+\centering
+		\begin{tikzpicture}
+        	\begin{axis}[
+        	title={Heat against Time},
+        	xlabel={Time (\gls{acr:ps})},
+        	ylabel={Temperature (K)},
+        	width=0.7\textwidth,
+        	height=0.7\textheight,
+        	legend pos=outer north east,
+        	align=center,
+        	ymin=0,
+        	ymax=350,
+        	xmin=0, xmax=1400,
+            xtick = {0, 200, 400, 600, 800, 1000, 1200, 1400},
+            %ytick = {-60000, -100000, -140000, -180000, -220000},
+        	]
+        	\addplot+[color=NottinghamBlue, mark=x, smooth] plot table [] {../Data/summary.TEMP};
+            \addplot +[mark=none, color=Black!50] coordinates {(200,0) (200,4000)};
+            \addplot +[mark=none, color=Black!50] coordinates {(400,0) (400,4000)};
+            \end{axis}
+       	\end{tikzpicture}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Volume Check}
+\begin{figure}
+\centering
+		\begin{tikzpicture}
+        	\begin{axis}[
+        	title={Volume against Time},
+        	xlabel={Time (\gls{acr:ps})},
+        	ylabel={Volume (\AA \textsuperscript{3})},
+        	width=0.7\textwidth,
+        	height=0.7\textheight,
+        	legend pos=outer north east,
+        	align=center,
+        	ymin= 530000,	ymax=620000,
+        	xmin=0, xmax=1400,
+            xtick = {0, 200, 400, 600, 800, 1000, 1200, 1400},
+            y tick label style={/pgf/number format/.cd,%
+            scaled y ticks = false,
+            set thousands separator={},
+            fixed,},
+        	]
+        	\addplot+[color=NottinghamBlue, mark=x, smooth] plot table [] {../Data/summary.VOLUME};
+            \addplot +[mark=none, color=Black!50] coordinates {(200,0) (200,4000000)};
+            \addplot +[mark=none, color=Black!50] coordinates {(400,0) (400,4000000)};
+            \end{axis}
+       	\end{tikzpicture}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Energy Check}
+\begin{figure}
+\centering
+		\begin{tikzpicture}
+        	\begin{axis}[
+        	title={Energy against Time},
+        	xlabel={Time (\gls{acr:ps})},
+        	ylabel={Energy (kcal mol$^{-1}$)},
+        	width=0.7\textwidth,
+        	height=0.7\textheight,
+        	legend pos=outer north east,
+        	align=center,
+        	ymin= -210000,	ymax=50000,
+        	xmin=0, xmax=1400,
+            xtick = {0, 200, 400, 600, 800, 1000, 1200, 1400},
+            y tick label style={/pgf/number format/.cd,%
+            scaled y ticks = false,
+            set thousands separator={},
+            fixed,},
+        	]
+        	\addplot+[color=NottinghamBlue, mark=x, smooth] plot table [] {../Data/summary.ETOT};
+            \addplot+[color=ForestGreen, mark=x, smooth] plot table [] {../Data/summary.EKTOT};
+            \addplot+[color=JubileeRed, mark=x, smooth] plot table [] {../Data/summary.EPTOT};
+            \addplot +[mark=none, color=Black!50] coordinates {(200,-300000) (200,100000)};
+            \addplot +[mark=none, color=Black!50] coordinates {(400,-300000) (400,100000)};
+            \legend{Total Energy, Kinetic Energy, Potential Energy}
+            \end{axis}
+       	\end{tikzpicture}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Energy Check}
+\begin{figure}
+\centering
+		\begin{tikzpicture}
+        	\begin{axis}[
+        	title={RMSD against Frames},
+        	xlabel={Frame},
+        	ylabel={RMSD (\AA )},
+        	width=0.7\textwidth,
+        	height=0.7\textheight,
+        	legend pos=outer north east,
+        	align=center,
+        	ymin= 0,	ymax=1.6,
+        	xmin=0, xmax=7000,
+            xtick = {0, 1000, 2000, 3000, 4000, 5000, 6000, 7000}
+        	]
+        	\addplot+[color=NottinghamBlue, mark=x, smooth] plot table [x=Frame, y expr=\thisrow{RMSD}] {../Data/backbone_RMSD.dat};
+            \end{axis}
+       	\end{tikzpicture}
+\end{figure}
+\end{frame}
