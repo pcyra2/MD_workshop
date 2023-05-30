@@ -1,0 +1,49 @@
+\subsection{Molecular Dynamics}
+\begin{frame}{Molecular Dynamics}
+Molecular Dynamics employs an empirical force field derived from classical physics in order to describe the system.
+\begin{equation}
+\label{eq:EMM}
+\begin{split}
+E_{Total} & = E_{Bonded} + E_{Non-Bonded} \\
+E_{Bonded} & = E_{Bond} + E_{Angle} + E_{Dihedral} \\
+E_{Non-Bonded} & = E_{Electrostatic} + E_{van ~der ~Waals} \\
+\end{split}
+\end{equation}
+\begin{enumerate}
+\item Potential energy of the system is calculated using \cref{eq:EMM}.
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}{Molecular Dynamics}
+Molecular Dynamics employs an empirical force field derived from classical physics in order to describe the system.
+\begin{equation}
+\label{eq:EMM1}
+\begin{split}
+F(x) = - \Delta E(x)
+\end{split}
+\end{equation}
+\begin{enumerate}
+\item Potential energy of the system is calculated using \cref{eq:EMM}.
+\item Forces are derived by taking the negative gradient of the potential energy with respect to the atomic coordinates.
+
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}{Molecular Dynamics}
+Molecular Dynamics employs an empirical force field derived from classical physics in order to describe the system.
+\begin{equation}
+\label{eq:EMM2}
+\begin{split}
+F &= m a \\
+x_{i+1} &= x_i +\delta_t v_i \\
+\end{split}
+\end{equation}
+\begin{enumerate}
+\item Potential energy of the system is calculated using \cref{eq:EMM}.
+\item Forces are derived by taking the negative gradient of the potential energy with respect to the atomic coordinates.
+\item Velocities are then calculated using Newtons Laws of motion and the positions are updated with respect to the time step.
+\end{enumerate}
+
+\end{frame}

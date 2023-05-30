@@ -1,5 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-wget https://repo.anaconda.com/archive/Anaconda3\PYGZhy{}2023.03\PYGZhy{}1\PYGZhy{}Linux\PYGZhy{}x86\PYGZus{}64.sh .
-sh Anaconda3\PYGZhy{}2023.03\PYGZhy{}1\PYGZhy{}Linux\PYGZhy{}x86\PYGZus{}64.sh
-\PYG{c+c1}{\PYGZsh{} Accept the license agreement and use all defaults suggested.}
-\end{Verbatim}

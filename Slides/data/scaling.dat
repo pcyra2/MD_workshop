@@ -1,0 +1,8 @@
+x		y
+1-thread		0.61
+4-threads		2.15
+8-threads		3.45
+10-threads		3.76
+16-threads		3.44
+20-threads		3.47
+1-gpu			271.69

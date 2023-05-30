@@ -2186,6 +2186,34 @@
     <bcf:citekey order="1">Ponder2003ForceSimulations</bcf:citekey>
     <bcf:citekey order="2">Vanommeslaeghe2009CHARMMFields</bcf:citekey>
     <bcf:citekey order="3">Maier2015Ff14SB:Ff99SB</bcf:citekey>
+    <bcf:citekey order="4">Kollman2000CalculatingModels</bcf:citekey>
+    <bcf:citekey order="5">Weitman2010ChallengesMonoterpenes</bcf:citekey>
+    <bcf:citekey order="6">Maier2015Ff14SB:Ff99SB</bcf:citekey>
+    <bcf:citekey order="7">WilliamHumphrey1996VMDDynamics</bcf:citekey>
+    <bcf:citekey order="8">McNutt2021GNINALearning</bcf:citekey>
+    <bcf:citekey order="9">SousadaSilva2012ACPYPEInterfacE</bcf:citekey>
+    <bcf:citekey order="10">Brooks1983CHARMM:Calculations</bcf:citekey>
+    <bcf:citekey order="11">Berendsen1995GROMACS:Implementation</bcf:citekey>
+    <bcf:citekey order="12">Vanommeslaeghe2012AutomationTyping</bcf:citekey>
+    <bcf:citekey order="13">Morris2009AutoDock4Flexibility</bcf:citekey>
+    <bcf:citekey order="14">Krieger2014YASARAWorkstations</bcf:citekey>
+    <bcf:citekey order="15">Jumper2021HighlyAlphaFold</bcf:citekey>
+    <bcf:citekey order="15">Varadi2022AlphaFoldModels</bcf:citekey>
+    <bcf:citekey order="16">Varadi2022AlphaFoldModels</bcf:citekey>
+    <bcf:citekey order="17">Varadi2022AlphaFoldModels</bcf:citekey>
+    <bcf:citekey order="18">SousadaSilva2012ACPYPEInterfacE</bcf:citekey>
+    <bcf:citekey order="19">Jakalian2002FastValidation</bcf:citekey>
+    <bcf:citekey order="20">Wang2004DevelopmentField</bcf:citekey>
+    <bcf:citekey order="21">Maier2015Ff14SB:Ff99SB</bcf:citekey>
+    <bcf:citekey order="22">Brooks1983CHARMM:Calculations</bcf:citekey>
+    <bcf:citekey order="23">Berendsen1995GROMACS:Implementation</bcf:citekey>
+    <bcf:citekey order="24">Maier2015Ff14SB:Ff99SB</bcf:citekey>
+    <bcf:citekey order="25">Cournia2017RelativeConsiderations</bcf:citekey>
+    <bcf:citekey order="25">Genheden2012ComparisonEnergies</bcf:citekey>
+    <bcf:citekey order="25">Singh2010AbsoluteInteractions</bcf:citekey>
+    <bcf:citekey order="25">P.Bhati2016RapidIntegration</bcf:citekey>
+    <bcf:citekey order="25">Wang2019End-PointDesign</bcf:citekey>
+    <bcf:citekey order="26">Wang2019End-PointDesign</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="none">

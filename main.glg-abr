@@ -1,5 +1,10 @@
 This is makeindex, version 2.15 [TeX Live 2019] (kpathsea + Thai support).
 Scanning style file ./main.ist.............................done (29 attributes redefined, 0 ignored).
-Scanning input file main.glo-abr...done (0 entries accepted, 0 rejected).
-Nothing written in main.gls-abr.
+Scanning input file main.glo-abr....
+!! Input index error (file = main.glo-abr, line = 49):
+   -- First argument too long (max 10240).
+done (48 entries accepted, 1 rejected).
+Sorting entries....done (313 comparisons).
+Generating output file main.gls-abr....done (50 lines written, 0 warnings).
+Output written in main.gls-abr.
 Transcript written in main.glg-abr.

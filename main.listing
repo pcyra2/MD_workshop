@@ -1,2 +1,8 @@
-    wget https://files.rcsb.org/download/1AZX.pdb .
+    cd ../Free_Energy/
+    cp ../Dynamics/prod.nc .
+    cp ../Dynamics/complex.parm7 SOLVATED_COMPLEX.parm7
+    ante-MMPBSA.py -p SOLVATED_COMPLEX.parm7 -c complex.parm7 -r receptor.parm7 -l ligand.parm7 -s :WAT,Na+ -n :UNL --radii=mbondi2
+    wget https://raw.githubusercontent.com/pcyra2/MD_workshop/main/Files /Energy/gbsa.in
+    mpirun -np 10 MMPBSA.py.MPI -O -i gbsa.in -o gb_results.dat -sp SOLVATED_COMPLEX.parm7 -cp complex.parm7 -rp receptor.parm7 -lp ligand.parm7
+    tail gb_results.dat
     

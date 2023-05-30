@@ -1,9 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-mkdir MD\PYGZus{}Workshop
-\PYG{n+nb}{cd} MD\PYGZus{}Workshop
-mkdir Structures
-mkdir Docking
-mkdir Dynamics
-mkdir Analysis
-mkdir Free\PYGZus{}Energy
-\end{Verbatim}

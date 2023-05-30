@@ -1,0 +1,124 @@
+\mode<presentation>
+
+\institute[UoN]{
+School of Chemistry\\
+University of Nottingham
+}
+
+
+
+
+
+
+%\usefonttheme{serif} % Serif fonts
+\RequirePackage[most]{tcolorbox}
+\tcbuselibrary{skins}
+
+% Define UoN Colors
+%\PassOptionsToPackage[svgnames, x11names, luatex, rgb]{xcolor}
+\definecolor{NottinghamBlue}{RGB}{16, 38, 59}
+\definecolor{JubileeRed}{RGB}{185, 28, 46}
+\definecolor{MandarinOrange}{RGB}{249, 129, 9}
+\definecolor{RebelsGold}{RGB}{222, 180, 6}
+\definecolor{PioneeringPink}{RGB}{215, 51, 108}
+\definecolor{CivicPurple}{RGB}{121, 45, 133}
+\definecolor{ForestGreen}{RGB}{0, 95, 54}
+\definecolor{BramleyApple}{RGB}{147, 213, 0}
+\definecolor{TrentTurquoise}{RGB}{55, 180, 176}
+\definecolor{MalaysiaSkyBlue}{RGB}{0, 155, 193}
+\definecolor{PortlandStone}{RGB}{250, 246, 239}
+\definecolor{LinkColour}{RGB}{16, 38, 59} %Nottingham blue
+
+\setbeamertemplate{navigation symbols}{} % Turns off nav symbols
+
+% formatting of Title Page
+\setbeamercolor*{title}{fg=black}
+\setbeamerfont{title}{size=\huge}
+
+\setbeamercolor*{subtitle}{fg=black!80!white}
+\setbeamerfont{subtitle}{size=\large}
+
+\setbeamercolor*{background canvas}{bg=white}
+
+\setbeamertemplate{title page}
+{
+		
+	\vfill
+		{\centering
+		\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle
+		\par
+		}
+		\vskip1cm
+		{\centering
+		\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertauthor
+		\par
+		}
+		\vskip0.2cm
+		{\centering
+		\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertinstitute
+		\par
+		}
+	\vfill
+}
+
+% formatting of ToC
+
+\setbeamercolor{section in toc}{fg=black}
+
+
+
+% formatting of content page
+
+
+\setbeamerfont{frametitle}{size={\Large}} %\Large size for frame titles
+\setbeamercolor*{frametitle}{fg=white!100}
+\setbeamercolor*{page number in head/foot}{fg=black}
+\setbeamerfont{footline}{size={\tiny}}
+
+%	\includegraphics[width=\paperwidth]{figures/headerOnly.eps} 	
+
+\setbeamertemplate{frametitle}
+{%
+    \nointerlineskip\vskip-1.3ex
+    \begin{tcolorbox}[%
+      enhanced,%
+      sharp corners,%
+      boxrule=0pt,%
+      frame empty,%
+      watermark graphics={figures/headerOnly.eps},%
+      watermark zoom=1.00,%
+      enlarge left by=-\beamer@leftmargin,%
+      width=\paperwidth,%
+      colback=white,%
+    ]
+     \vspace{0.02\pageheight}\hspace{0.2\pagewidth}\strut\textcolor{white}{\textbf{\insertframetitle}}\strut
+    \end{tcolorbox}
+}
+
+\setbeamertemplate{footline}{
+  \leavevmode%
+%  \ifnum\thepage>1\relax%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{}%
+	\ifnum\thepage>1\relax%
+    \insertshortauthor, \insertshortinstitute
+    \fi
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{}%
+	\ifnum\thepage>1\relax%
+    \insertshortdate
+    \fi
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{}%
+	\ifnum\thepage>1\relax%
+	\insertframenumber{} of \inserttotalframenumber \hspace*{2ex} 
+	\fi
+  \end{beamercolorbox}}%
+  \vskip0pt%
+%  \fi
+}
+
+% Set other frame features
+\setbeamercolor{itemize item}{fg=NottinghamBlue}
+\setbeamertemplate{itemize item}[square]
+
