@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.10.0 (TeX Live 2019/Debian)  (format=lualatex 2022.11.10)  30 MAY 2023 18:33
+This is LuaTeX, Version 1.10.0 (TeX Live 2019/Debian)  (format=lualatex 2022.11.10)  30 MAY 2023 18:34
  system commands enabled.
 **main.tex
 (./main.tex
@@ -1437,12 +1437,12 @@ Package polyglossia Info: Option: English, variant=american.
 )
 Package polyglossia Info: Option: english variant=british.
 Module polyglossia Info: Language data for ukenglish
-(polyglossia)            righthyphenmin	3
 (polyglossia)            synonyms	british,UKenglish
-(polyglossia)            loader	loadhyph-en-gb.tex
-(polyglossia)            hyphenation	hyph-en-gb.hyp.txt
+(polyglossia)            righthyphenmin	3
+(polyglossia)            patterns	hyph-en-gb.pat.txt
 (polyglossia)            lefthyphenmin	2
-(polyglossia)            patterns	hyph-en-gb.pat.txt on input line 185
+(polyglossia)            loader	loadhyph-en-gb.tex
+(polyglossia)            hyphenation	hyph-en-gb.hyp.txt on input line 185
 Module polyglossia Info: Language ukenglish was not yet loaded; created with id 
 2 on input line 185
 Package polyglossia Info: Option: english variant=british.
@@ -4429,12 +4429,12 @@ Overfull \hbox (21.90002pt too wide) detected at line 8
 
 )) [57] [58]
 Module polyglossia Info: Language data for british
-(polyglossia)            righthyphenmin	3
 (polyglossia)            synonyms	british,UKenglish
-(polyglossia)            loader	loadhyph-en-gb.tex
-(polyglossia)            hyphenation	hyph-en-gb.hyp.txt
+(polyglossia)            righthyphenmin	3
+(polyglossia)            patterns	hyph-en-gb.pat.txt
 (polyglossia)            lefthyphenmin	2
-(polyglossia)            patterns	hyph-en-gb.pat.txt on input line 59
+(polyglossia)            loader	loadhyph-en-gb.tex
+(polyglossia)            hyphenation	hyph-en-gb.hyp.txt on input line 59
 Module polyglossia Info: Language british was not yet loaded; created with id 4 
 on input line 59
 Module polyglossia Info: Language british already loaded; id is 4 on input line 
