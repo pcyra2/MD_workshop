@@ -37,6 +37,7 @@
     obabel -imol2 pose_1.mol2 -oxyz -Opose_1.xyz -h
     sed -i.bak -e '15d' pose_1.xyz 
     sed -i.bak "1s/28/27/g" pose_1.xyz
+    obabel -ixyz pose_1.xyz -omol2 -Opose_1.mol2
     sed -i.bak '9s/C.3/C.2/g' pose_1.mol2
     \end{bashcmd}
 
