@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.10.0 (TeX Live 2019/Debian)  (format=lualatex 2022.11.10)  30 MAY 2023 18:34
+This is LuaTeX, Version 1.10.0 (TeX Live 2019/Debian)  (format=lualatex 2023.5.31)  31 MAY 2023 15:26
  system commands enabled.
 **main.tex
 (./main.tex
@@ -1437,12 +1437,12 @@ Package polyglossia Info: Option: English, variant=american.
 )
 Package polyglossia Info: Option: english variant=british.
 Module polyglossia Info: Language data for ukenglish
-(polyglossia)            synonyms	british,UKenglish
-(polyglossia)            righthyphenmin	3
-(polyglossia)            patterns	hyph-en-gb.pat.txt
-(polyglossia)            lefthyphenmin	2
+(polyglossia)            hyphenation	hyph-en-gb.hyp.txt
 (polyglossia)            loader	loadhyph-en-gb.tex
-(polyglossia)            hyphenation	hyph-en-gb.hyp.txt on input line 185
+(polyglossia)            patterns	hyph-en-gb.pat.txt
+(polyglossia)            righthyphenmin	3
+(polyglossia)            lefthyphenmin	2
+(polyglossia)            synonyms	british,UKenglish on input line 185
 Module polyglossia Info: Language ukenglish was not yet loaded; created with id 
 2 on input line 185
 Package polyglossia Info: Option: english variant=british.
@@ -4380,8 +4380,21 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 
 
 \openout9 = main.listing
+runsystem(python -c "import sys; import os; import textwrap; from io import open
+; fname = os.path.expanduser(os.path.expandvars(\"main.listing\")); f = open(fna
+me, \"r\", encoding=\"UTF8\") if os.path.isfile(fname) else None; t = f.readline
+s() if f is not None else None; t_opt = t if t is not None else []; f.close() if
+ f is not None else None; tmpfname = os.path.expanduser(os.path.expandvars(\"mai
+n.pyg\")); f = open(tmpfname, \"w\", encoding=\"UTF8\") if t is not None else No
+ne; fvstartnum = 0; fvstopnum = 0; s = fvstartnum-1 if fvstartnum != 0 else 0; e
+ = fvstopnum if fvstopnum != 0 else len(t_opt); [f.write(textwrap.dedent(\"\".jo
+in(x))) for x in (t_opt[0:s], t_opt[s:e], t_opt[e:]) if x and t is not None]; f.
+close() if t is not None else os.remove(tmpfname);")...executed
+runsystem(pygmentize -l bash -f latex -P commandprefix=PYG -F tokenmerge -P stri
+pall=True -o _minted-main/09AACAA050670A161569A3A1F313009D3284924AA36169E0E0BA54
+35B60A0441.pygtex main.pyg)...executed
 
-(./_minted-main/A4398B3295209E9F8B7FC53FD48A232A3284924AA36169E0E0BA5435B60A044
+(./_minted-main/09AACAA050670A161569A3A1F313009D3284924AA36169E0E0BA5435B60A044
 1.pygtex
 Overfull \hbox (21.90002pt too wide) detected at line 2
 [][] \remove@tlig $ [] [][]
@@ -4429,12 +4442,12 @@ Overfull \hbox (21.90002pt too wide) detected at line 8
 
 )) [57] [58]
 Module polyglossia Info: Language data for british
-(polyglossia)            synonyms	british,UKenglish
-(polyglossia)            righthyphenmin	3
-(polyglossia)            patterns	hyph-en-gb.pat.txt
-(polyglossia)            lefthyphenmin	2
+(polyglossia)            hyphenation	hyph-en-gb.hyp.txt
 (polyglossia)            loader	loadhyph-en-gb.tex
-(polyglossia)            hyphenation	hyph-en-gb.hyp.txt on input line 59
+(polyglossia)            patterns	hyph-en-gb.pat.txt
+(polyglossia)            righthyphenmin	3
+(polyglossia)            lefthyphenmin	2
+(polyglossia)            synonyms	british,UKenglish on input line 59
 Module polyglossia Info: Language british was not yet loaded; created with id 4 
 on input line 59
 Module polyglossia Info: Language british already loaded; id is 4 on input line 
@@ -4546,6 +4559,8 @@ runsystem(makeindex -s main.ist -t main.glg-abr -o main.gls-abr main.glo-abr)...
 executed
 runsystem(makeindex -s main.ist -t main.glignoredl -o main.glignored main.gligno
 redin)...executed
+runsystem(rm _minted-main/A4398B3295209E9F8B7FC53FD48A232A3284924AA36169E0E0BA54
+35B60A0441.pygtex)...executed
 LaTeX Info: Redefining \rmfamily on input line 62.
 LaTeX Info: Redefining \sffamily on input line 62.
 LaTeX Info: Redefining \ttfamily on input line 62.
@@ -4575,13 +4590,14 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 LaTeX Warning: There were multiply-defined labels.
 
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 62.
+runsystem(rm main.pyg)...executed
 Package logreq Info: Writing requests to 'main.run.xml'.
 
 \openout1 = main.run.xml
 )
 
 Here is how much of LuaTeX's memory you used:
- 86583 strings out of 481365
+ 86587 strings out of 481365
  1819194,8504848 words of node,token memory allocated
  1776 words of node memory still in use:
    31 hlist, 2 vlist, 14 rule, 5 glue, 4 kern, 1 glyph, 111 attribute, 98 glue_s
@@ -4589,8 +4605,8 @@ pec, 111 attribute_list, 3 write, 24 pdf_literal, 19 pdf_action, 24 pdf_colorsta
 ck nodes
    avail lists: 1:19,2:381767,3:162934,4:562,5:269,6:142,7:29026,8:145,9:900,10:
 18,11:248
- 99291 multiletter control sequences out of 65536+600000
- 146 fonts using 46953907 bytes
+ 99292 multiletter control sequences out of 65536+600000
+ 146 fonts using 46953675 bytes
  79i,20n,129p,10115b,2933s stack positions out of 5000i,500n,10000p,463605b,100000s
 </usr/share/fonts/truetype/ubuntu/UbuntuMono-B.ttf></usr/share/texlive/texmf-dis
 t/fonts/opentype/public/stix2-otf/STIX2Math.otf></usr/share/fonts/truetype/ubunt
@@ -4601,7 +4617,7 @@ texmf/fonts/opentype/public/lm/lmsans10-bold.otf></usr/share/texlive/texmf-dist/
 fonts/opentype/huerta/alegreya/Alegreya-Italic.otf></usr/share/texlive/texmf-dis
 t/fonts/opentype/huerta/alegreya/Alegreya-Regular.otf></usr/share/texlive/texmf-
 dist/fonts/opentype/huerta/alegreya/AlegreyaSC-Bold.otf>
-Output written on main.pdf (61 pages, 4422638 bytes).
+Output written on main.pdf (61 pages, 4422644 bytes).
 
 PDF statistics: 1089 PDF objects out of 1200 (max. 8388607)
  935 compressed objects within 10 object streams
